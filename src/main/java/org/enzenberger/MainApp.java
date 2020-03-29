@@ -36,8 +36,6 @@ public class MainApp extends Application {
         showSetup();
     }
 
-
-
     private void initRootLayout() {
         try{
             FXMLLoader loader = new FXMLLoader();

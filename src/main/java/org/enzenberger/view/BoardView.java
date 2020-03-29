@@ -1,5 +1,8 @@
 package org.enzenberger.view;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -7,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.util.Duration;
 import org.enzenberger.Player;
 import org.enzenberger.model.Board;
 
@@ -120,7 +124,25 @@ public class BoardView {
     }
 
     public Node getBoardGroup() {
-
+        displayCurrentBoard();
         return boardView;
     }
+
+    private void animateStoneDrop(int xPosition, int yPosition, Player player) {
+        Circle stone = new Circle(boardStartX + xPosition * gridDistance + gridDistance / 2,
+                boardStartY, this.referenceStone.getRadius(), player.getColor());
+        this.boardView.getChildren().add(0, stone);
+        Timeline timeline = new Timeline();
+        timeline.getKeyFrames().addAll(
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(stone.translateXProperty(), 0),
+                        new KeyValue(stone.translateYProperty(), 0)),
+                new KeyFrame(new Duration(50 * (yPosition + 1)),
+                        new KeyValue(stone.translateXProperty(), 0),
+                        new KeyValue(stone.translateYProperty(), yPosition * gridDistance + gridDistance / 2))
+        );
+        timeline.play();
+    }
+
+    //todo setup listeners
 }
