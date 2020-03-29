@@ -109,7 +109,6 @@ public class BoardViewOld extends Application {
         this.stage.show();
     }
 
-    //todo
     private Group getColumnButtons() {
         Group buttons = new Group();
         for (int buttonIndex = 0; buttonIndex < columnButtons.size(); buttonIndex++){

@@ -2,11 +2,11 @@ package org.enzenberger;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.enzenberger.model.Game;
+import org.enzenberger.view.BoardView;
 
 import java.io.IOException;
 
@@ -32,9 +32,11 @@ public class MainApp extends Application {
         this.primaryStage.setTitle("4ever");
 
         initRootLayout();
-        initBoard();
+        showBoard();
         showSetup();
     }
+
+
 
     private void initRootLayout() {
         try{
@@ -50,11 +52,13 @@ public class MainApp extends Application {
         }
     }
 
-    private void showSetup() {
-        //todo
+    private void showBoard() {
+        BoardView boardView = BoardView.getInstance();
+        boardView.setBoard(this.game);
+        boardView.setScene(this.primaryStage.getScene());
+        this.rootLayout.getChildren().add(boardView.getBoardGroup());
     }
 
-    private void initBoard() {
-        //todo
+    private void showSetup() {
     }
 }
