@@ -42,7 +42,7 @@ public class MainApp extends Application {
         try{
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("RootLayout.fxml"));
-            rootLayout = (AnchorPane)loader.load();
+            rootLayout = loader.load();
 
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
@@ -54,7 +54,7 @@ public class MainApp extends Application {
 
     private void showBoard() {
         BoardView boardView = BoardView.getInstance();
-        boardView.setBoard(this.game);
+        boardView.setBoard(this.game.getBoard());
         boardView.setScene(this.primaryStage.getScene());
         this.rootLayout.getChildren().add(boardView.getBoardGroup());
     }
