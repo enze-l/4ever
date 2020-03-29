@@ -80,9 +80,9 @@ public class BoardView {
 
     private List<Circle> getStones() {
         List<Circle> list = new LinkedList<>();
-        for (int width = 0; width < stones.size(); width++) {
-            for (int height = 0; height < stones.get(0).size(); height++) {
-                Player player = stones.get(width).get(height);
+        for (int width = 0; width < Board.columnCount; width++) {
+            for (int height = 0; height < Board.rowCount; height++) {
+                Player player = board.getField(width, height);
                 if (player != null) {
                     list.add(new Circle(boardStartX + gridDistance * width + gridDistance / 2,
                             boardStartY + gridDistance * height + gridDistance / 2,
