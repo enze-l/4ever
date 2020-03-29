@@ -52,8 +52,8 @@ public class MainApp extends Application {
 
     private void showBoard() {
         BoardView boardView = BoardView.getInstance();
-        boardView.setBoard(this.game.getBoard());
         boardView.setScene(this.primaryStage.getScene());
+        boardView.setGame(this.game);
         this.rootLayout.getChildren().add(boardView.getBoardGroup());
     }
 

@@ -11,8 +11,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
+import org.enzenberger.BoardController;
 import org.enzenberger.Player;
 import org.enzenberger.model.Board;
+import org.enzenberger.model.Game;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -20,7 +22,8 @@ import java.util.List;
 public class BoardView {
     private static BoardView instance;
 
-    private Board board;
+    private BoardController boardController;
+    private Game game;
 
     private Group boardView;
     private Scene scene;
@@ -49,8 +52,17 @@ public class BoardView {
         return instance;
     }
 
-    public void setBoard(Board board) {
-        this.board = board;
+    public void setGame(Game game) {
+        this.game = game;
+        for (int width=0; width<Board.columnCount; width++){
+            for (int height=0; height<Board.rowCount; height++){
+                int xPosition = width;
+                int yPosition = height;
+                this.game.getBoard().getFieldProperty(width, height).addListener(
+                        (observableValue, player, t1) -> animateStoneDrop(xPosition, yPosition, player)
+                );
+            }
+        }
     }
 
     public void setScene(Scene scene) {
@@ -86,7 +98,7 @@ public class BoardView {
         List<Circle> list = new LinkedList<>();
         for (int width = 0; width < Board.columnCount; width++) {
             for (int height = 0; height < Board.rowCount; height++) {
-                Player player = board.getField(width, height);
+                Player player = this.game.getBoard().getField(width, height);
                 if (player != null) {
                     list.add(new Circle(boardStartX + gridDistance * width + gridDistance / 2,
                             boardStartY + gridDistance * height + gridDistance / 2,
@@ -143,6 +155,4 @@ public class BoardView {
         );
         timeline.play();
     }
-
-    //todo setup listeners
 }
