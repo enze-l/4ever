@@ -11,8 +11,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
-import org.enzenberger.BoardController;
-import org.enzenberger.Player;
+import org.enzenberger.control.BoardController;
+import org.enzenberger.model.Player;
 import org.enzenberger.model.Board;
 import org.enzenberger.model.Game;
 
@@ -61,7 +61,7 @@ public class BoardView {
                 int xPosition = width;
                 int yPosition = height;
                 this.game.getBoard().getFieldProperty(width, height).addListener(
-                        (observableValue, player, t1) -> animateStoneDrop(xPosition, yPosition, player)
+                        move -> animateStoneDrop(game.getBoard().getField(xPosition, yPosition), xPosition, yPosition)
                 );
             }
         }
@@ -142,7 +142,7 @@ public class BoardView {
         return boardView;
     }
 
-    private void animateStoneDrop(int xPosition, int yPosition, Player player) {
+    private void animateStoneDrop(Player player, int xPosition, int yPosition) {
         Circle stone = new Circle(boardStartX + xPosition * gridDistance + gridDistance / 2,
                 boardStartY, this.referenceStone.getRadius(), player.getColor());
         this.boardView.getChildren().add(0, stone);

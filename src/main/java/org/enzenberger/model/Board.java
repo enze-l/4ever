@@ -2,7 +2,6 @@ package org.enzenberger.model;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
-import org.enzenberger.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +13,7 @@ public class Board {
 
     List<List<Property<Player>>> fields;
     List<List<Player>> groundTruth;
+
 
     public Board(){
         fields = new ArrayList<>();
