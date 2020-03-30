@@ -3,9 +3,9 @@ package org.enzenberger.model;
 
 import javafx.scene.paint.Color;
 
-public class HumanPlayer extends Player {
+public class LocalPlayer extends Player {
 
-    public HumanPlayer(Color color) {
+    public LocalPlayer(Color color) {
         super(color);
     }
 }
