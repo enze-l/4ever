@@ -7,7 +7,7 @@ import org.enzenberger.model.Player;
 public class BoardController {
     Board board;
 
-    public BoardController(){
+    public BoardController() {
 
     }
 
@@ -15,10 +15,10 @@ public class BoardController {
         this.board = board;
     }
 
-    public void dropStone(Player player, int column) throws ColumnOverflowException{
+    public void dropStone(Player player, int column) throws ColumnOverflowException {
         if (!dropPossible(column)) throw new ColumnOverflowException();
         int row = 0;
-        while (board.getField(column, row+1)==null){
+        while (row + 1 < Board.rowCount&&board.getField(column, row + 1) == null) {
             row++;
         }
         board.setField(player, column, row);

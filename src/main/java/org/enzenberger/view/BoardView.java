@@ -12,6 +12,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 import org.enzenberger.control.BoardController;
+import org.enzenberger.control.GameController;
 import org.enzenberger.model.Player;
 import org.enzenberger.model.Board;
 import org.enzenberger.model.Game;
@@ -24,6 +25,7 @@ public class BoardView {
 
     private BoardController boardController;
     private Game game;
+    private GameController gameController;
 
     private Group boardView;
     private Scene scene;
@@ -38,12 +40,14 @@ public class BoardView {
 
     private BoardView() {
         this.boardController = new BoardController();
+        this.gameController = new GameController();
         this.boardView = new Group();
         this.referenceStone = new Circle();
         this.columnButtons = new LinkedList<>();
         for (int width = 0; width < Board.columnCount; width++) {
             this.columnButtons.add(new Rectangle());
         }
+
     }
 
     public static BoardView getInstance() {
@@ -57,6 +61,8 @@ public class BoardView {
         this.game = game;
         this.boardController.setBoard(this.game.getBoard());
         for (int width=0; width<Board.columnCount; width++){
+            int column = width;
+            this.columnButtons.get(width).setOnMouseClicked(click -> gameController.onColumnClicked(column, this.boardController));
             for (int height=0; height<Board.rowCount; height++){
                 int xPosition = width;
                 int yPosition = height;
@@ -151,7 +157,7 @@ public class BoardView {
                 new KeyFrame(Duration.ZERO,
                         new KeyValue(stone.translateXProperty(), 0),
                         new KeyValue(stone.translateYProperty(), 0)),
-                new KeyFrame(new Duration(50 * (yPosition + 1)),
+                new KeyFrame(new Duration(40 * (yPosition + 1)),
                         new KeyValue(stone.translateXProperty(), 0),
                         new KeyValue(stone.translateYProperty(), yPosition * gridDistance + gridDistance / 2))
         );
