@@ -1,5 +1,7 @@
 package org.enzenberger.model;
 
+import org.enzenberger.model.player.Player;
+
 public class Game {
     private Board board;
 

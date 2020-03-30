@@ -1,4 +1,4 @@
-package org.enzenberger.model;
+package org.enzenberger.model.player;
 
 
 import javafx.scene.paint.Color;

@@ -2,6 +2,7 @@ package org.enzenberger.model;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
+import org.enzenberger.model.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;

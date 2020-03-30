@@ -67,6 +67,7 @@ public class MainApp extends Application {
             loader.setLocation(MainApp.class.getResource("SelectionWindow.fxml"));
             StackPane selectionWindow = loader.load();
             SelectionController selectionController = loader.getController();
+            selectionController.setGame(this.game);
 
             selectionWindow.setAlignment(Pos.CENTER);
             selectionWindow.setPrefHeight(rootLayout.getHeight());

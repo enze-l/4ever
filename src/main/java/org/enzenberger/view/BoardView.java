@@ -13,7 +13,7 @@ import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 import org.enzenberger.control.BoardController;
 import org.enzenberger.control.GameController;
-import org.enzenberger.model.Player;
+import org.enzenberger.model.player.Player;
 import org.enzenberger.model.Board;
 import org.enzenberger.model.Game;
 

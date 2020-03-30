@@ -2,7 +2,7 @@ package org.enzenberger.control;
 
 import org.enzenberger.exceptions.ColumnOverflowException;
 import org.enzenberger.model.Board;
-import org.enzenberger.model.Player;
+import org.enzenberger.model.player.Player;
 
 public class BoardController {
     Board board;

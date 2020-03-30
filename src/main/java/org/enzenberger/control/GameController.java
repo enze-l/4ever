@@ -3,7 +3,7 @@ package org.enzenberger.control;
 import javafx.scene.paint.Color;
 import org.enzenberger.exceptions.ColumnOverflowException;
 import org.enzenberger.model.Game;
-import org.enzenberger.model.LocalPlayer;
+import org.enzenberger.model.player.LocalPlayer;
 
 public class GameController {
     private Game game;
