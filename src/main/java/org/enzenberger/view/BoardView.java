@@ -37,6 +37,7 @@ public class BoardView {
     private List<Rectangle> columnButtons;
 
     private BoardView() {
+        this.boardController = new BoardController();
         this.boardView = new Group();
         this.referenceStone = new Circle();
         this.columnButtons = new LinkedList<>();
@@ -54,6 +55,7 @@ public class BoardView {
 
     public void setGame(Game game) {
         this.game = game;
+        this.boardController.setBoard(this.game.getBoard());
         for (int width=0; width<Board.columnCount; width++){
             for (int height=0; height<Board.rowCount; height++){
                 int xPosition = width;
