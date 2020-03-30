@@ -6,9 +6,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.enzenberger.control.SelectionController;
+import org.enzenberger.control.ModeSelectionController;
+import org.enzenberger.control.PlayerSelectionController;
 import org.enzenberger.model.Game;
 import org.enzenberger.view.BoardView;
 
@@ -37,7 +37,7 @@ public class MainApp extends Application {
 
         initRootLayout();
         showBoard();
-        showSetup();
+        showPlayerSelection();
     }
 
     private void initRootLayout() {
@@ -61,24 +61,51 @@ public class MainApp extends Application {
         this.rootLayout.getChildren().add(boardView.getBoardGroup());
     }
 
-    private void showSetup() {
+    private void showPlayerSelection() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("SelectionWindow.fxml"));
-            StackPane selectionWindow = loader.load();
-            SelectionController selectionController = loader.getController();
-            selectionController.setGame(this.game);
+            loader.setLocation(MainApp.class.getResource("PlayerSelection.fxml"));
+            StackPane playerSelectionWindow = loader.load();
+            PlayerSelectionController playerSelectionController = loader.getController();
+            playerSelectionController.setGame(this.game);
+            playerSelectionController.setMainApp(this);
 
-            selectionWindow.setAlignment(Pos.CENTER);
-            selectionWindow.setPrefHeight(rootLayout.getHeight());
-            selectionWindow.setPrefWidth(rootLayout.getWidth());
-            rootLayout.widthProperty().addListener(observable -> selectionWindow.setPrefWidth(rootLayout.getWidth()));
-            rootLayout.heightProperty().addListener(observable -> selectionWindow.setPrefHeight(rootLayout.getHeight()));
+            playerSelectionWindow.setAlignment(Pos.CENTER);
+            playerSelectionWindow.setPrefHeight(rootLayout.getHeight());
+            playerSelectionWindow.setPrefWidth(rootLayout.getWidth());
+            rootLayout.widthProperty().addListener(observable -> playerSelectionWindow.setPrefWidth(rootLayout.getWidth()));
+            rootLayout.heightProperty().addListener(observable -> playerSelectionWindow.setPrefHeight(rootLayout.getHeight()));
 
-
-            this.rootLayout.getChildren().add(selectionWindow);
+            this.rootLayout.getChildren().add(playerSelectionWindow);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void showModeSelection() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("ModeSelection.fxml"));
+            StackPane modeSelectionWindow = loader.load();
+            ModeSelectionController modeSelectionController = loader.getController();
+            modeSelectionController.setGame(this.game);
+            modeSelectionController.setMainApp(this);
+
+            modeSelectionWindow.setAlignment(Pos.CENTER);
+            modeSelectionWindow.setPrefHeight(rootLayout.getHeight());
+            modeSelectionWindow.setPrefWidth(rootLayout.getWidth());
+            rootLayout.widthProperty().addListener(observable -> modeSelectionWindow.setPrefWidth(rootLayout.getWidth()));
+            rootLayout.heightProperty().addListener(observable -> modeSelectionWindow.setPrefHeight(rootLayout.getHeight()));
+
+            this.rootLayout.getChildren().add(modeSelectionWindow);
+
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showConnectionPanel() {
+        //todo
     }
 }
