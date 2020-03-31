@@ -4,17 +4,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enzenberger.control.ModeSelectionController">
-
-    <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: grey;" />
-    <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" />
-    <VBox alignment="CENTER" maxHeight="200.0" maxWidth="300.0" prefHeight="200.0" prefWidth="300.0" spacing="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enzenberger.control.ModeSelectionController">
+    <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="300.0"
+          style="-fx-background-color: grey;"/>
+    <Pane maxHeight="Infinity" maxWidth="Infinity" prefHeight="200.0" prefWidth="200.0"/>
+    <VBox alignment="CENTER" maxHeight="200.0" maxWidth="300.0" prefHeight="200.0" prefWidth="300.0" spacing="8.0"
+          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0">
         <padding>
-            <Insets bottom="16.0" left="64.0" right="64.0" top="16.0" />
+            <Insets bottom="16.0" left="64.0" right="64.0" top="16.0"/>
         </padding>
-        <Button maxWidth="Infinity" onAction="#setGameModeClassic" text="Classic" />
-        <Button maxWidth="Infinity" onAction="#setGameModeTime" text="Time-Attack" />
-        <Button maxWidth="Infinity" onAction="#setGameModeForever" text="Forever" />
+        <Button maxWidth="Infinity" onAction="#setGameModeClassic" text="Classic"/>
+        <Button maxWidth="Infinity" onAction="#setGameModeTime" text="Time-Attack"/>
+        <Button maxWidth="Infinity" onAction="#setGameModeForever" text="Forever"/>
     </VBox>
-
 </StackPane>
