@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import org.enzenberger.control.ModeSelectionController;
-import org.enzenberger.control.PlayerSelectionController;
 import org.enzenberger.control.SelectionWindow;
 import org.enzenberger.model.Game;
 import org.enzenberger.view.BoardView;
@@ -101,5 +99,9 @@ public class MainApp extends Application {
 
     public void exit(){
         this.primaryStage.close();
+    }
+
+    public void hideSelectionWindow() {
+        //todo
     }
 }
