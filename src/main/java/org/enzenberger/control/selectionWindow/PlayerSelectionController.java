@@ -1,27 +1,11 @@
-package org.enzenberger.control;
+package org.enzenberger.control.selectionWindow;
 
 import javafx.fxml.FXML;
 import javafx.scene.paint.Color;
-import org.enzenberger.MainApp;
-import org.enzenberger.model.Game;
 import org.enzenberger.model.player.LocalPlayer;
 import org.enzenberger.model.player.RemotePlayer;
 
-public class PlayerSelectionController implements SelectionWindow{
-
-    private Game game;
-    private MainApp mainApp;
-
-    public PlayerSelectionController(){}
-
-    public void setGame(Game game){
-        this.game = game;
-    }
-
-    public void setMainApp(MainApp mainApp){
-        this.mainApp = mainApp;
-    }
-
+public class PlayerSelectionController extends SelectionWindow{
     @FXML
     private void setSinglePlayerMode(){
         this.game.setPlayer1(new LocalPlayer(Color.BLUE));
