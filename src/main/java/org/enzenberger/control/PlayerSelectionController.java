@@ -6,9 +6,8 @@ import org.enzenberger.MainApp;
 import org.enzenberger.model.Game;
 import org.enzenberger.model.player.LocalPlayer;
 import org.enzenberger.model.player.RemotePlayer;
-import org.enzenberger.model.player.VirtualPlayer;
 
-public class PlayerSelectionController {
+public class PlayerSelectionController implements SelectionWindow{
 
     private Game game;
     private MainApp mainApp;
@@ -26,8 +25,7 @@ public class PlayerSelectionController {
     @FXML
     private void setSinglePlayerMode(){
         this.game.setPlayer1(new LocalPlayer(Color.BLUE));
-        this.game.setPlayer2(new VirtualPlayer(Color.RED));
-        this.mainApp.showModeSelection();
+        this.mainApp.showVirtualPlayerSelection();
     }
 
     @FXML
@@ -42,5 +40,10 @@ public class PlayerSelectionController {
         this.game.setPlayer1(new LocalPlayer(Color.BLUE));
         this.game.setPlayer2(new RemotePlayer(Color.RED));
         this.mainApp.showConnectionPanel();
+    }
+
+    @FXML
+    private void exitGame(){
+        this.mainApp.exit();
     }
 }

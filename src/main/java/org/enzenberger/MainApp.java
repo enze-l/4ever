@@ -9,6 +9,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.enzenberger.control.ModeSelectionController;
 import org.enzenberger.control.PlayerSelectionController;
+import org.enzenberger.control.SelectionWindow;
 import org.enzenberger.model.Game;
 import org.enzenberger.view.BoardView;
 
@@ -61,51 +62,44 @@ public class MainApp extends Application {
         this.rootLayout.getChildren().add(boardView.getBoardGroup());
     }
 
-    private void showPlayerSelection() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("PlayerSelection.fxml"));
-            StackPane playerSelectionWindow = loader.load();
-            PlayerSelectionController playerSelectionController = loader.getController();
-            playerSelectionController.setGame(this.game);
-            playerSelectionController.setMainApp(this);
-
-            playerSelectionWindow.setAlignment(Pos.CENTER);
-            playerSelectionWindow.setPrefHeight(rootLayout.getHeight());
-            playerSelectionWindow.setPrefWidth(rootLayout.getWidth());
-            rootLayout.widthProperty().addListener(observable -> playerSelectionWindow.setPrefWidth(rootLayout.getWidth()));
-            rootLayout.heightProperty().addListener(observable -> playerSelectionWindow.setPrefHeight(rootLayout.getHeight()));
-
-            this.rootLayout.getChildren().add(playerSelectionWindow);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void showPlayerSelection() {
+        showWindow("PlayerSelection.fxml");
     }
 
     public void showModeSelection() {
+        showWindow("ModeSelection.fxml");
+    }
+
+    public void showConnectionPanel() {
+        showWindow("ConnectionPanel.fxml");
+    }
+
+    public void showVirtualPlayerSelection() {
+        showWindow("VirtualPlayerSelection.fxml");
+    }
+
+    private void showWindow(String resourceName){
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("ModeSelection.fxml"));
-            StackPane modeSelectionWindow = loader.load();
-            ModeSelectionController modeSelectionController = loader.getController();
-            modeSelectionController.setGame(this.game);
-            modeSelectionController.setMainApp(this);
+            loader.setLocation(MainApp.class.getResource(resourceName));
+            StackPane selectionWindow = loader.load();
+            SelectionWindow selectionWindowController = loader.getController();
+            selectionWindowController.setGame(this.game);
+            selectionWindowController.setMainApp(this);
 
-            modeSelectionWindow.setAlignment(Pos.CENTER);
-            modeSelectionWindow.setPrefHeight(rootLayout.getHeight());
-            modeSelectionWindow.setPrefWidth(rootLayout.getWidth());
-            rootLayout.widthProperty().addListener(observable -> modeSelectionWindow.setPrefWidth(rootLayout.getWidth()));
-            rootLayout.heightProperty().addListener(observable -> modeSelectionWindow.setPrefHeight(rootLayout.getHeight()));
+            selectionWindow.setAlignment(Pos.CENTER);
+            selectionWindow.setPrefHeight(rootLayout.getHeight());
+            selectionWindow.setPrefWidth(rootLayout.getWidth());
+            rootLayout.widthProperty().addListener(observable -> selectionWindow.setPrefWidth(rootLayout.getWidth()));
+            rootLayout.heightProperty().addListener(observable -> selectionWindow.setPrefHeight(rootLayout.getHeight()));
 
-            this.rootLayout.getChildren().add(modeSelectionWindow);
-
-
+            this.rootLayout.getChildren().add(selectionWindow);
         } catch (IOException e){
             e.printStackTrace();
         }
     }
 
-    public void showConnectionPanel() {
-        //todo
+    public void exit(){
+        this.primaryStage.close();
     }
 }

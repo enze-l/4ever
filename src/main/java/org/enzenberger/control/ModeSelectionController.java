@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import org.enzenberger.MainApp;
 import org.enzenberger.model.Game;
 
-public class ModeSelectionController {
+public class ModeSelectionController implements SelectionWindow{
     private Game game;
     private MainApp mainApp;
 
@@ -31,5 +31,10 @@ public class ModeSelectionController {
     @FXML
     private void setGameModeForever(){
         //todo
+    }
+
+    @FXML
+    private void goBack(){
+        this.mainApp.showPlayerSelection();
     }
 }
