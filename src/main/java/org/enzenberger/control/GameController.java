@@ -5,16 +5,19 @@ import org.enzenberger.exceptions.ColumnOverflowException;
 import org.enzenberger.model.Game;
 import org.enzenberger.model.player.LocalPlayer;
 
-public class GameController {
+public class GameController implements BoardClickListener{
     private Game game;
+    private BoardController boardController;
 
     public GameController(){}
 
     public void setGame(Game game){
         this.game = game;
+        this.boardController = new BoardController();
+        this.boardController.setBoard(this.game.getBoard());
     }
 
-    public void onColumnClicked(int column, BoardController boardController) {
+    public void onColumnClicked(int column) {
         try {
             boardController.dropStone(new LocalPlayer(Color.BLUE), column);
         } catch (ColumnOverflowException e) {

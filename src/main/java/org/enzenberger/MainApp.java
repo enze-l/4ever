@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import org.enzenberger.control.GameController;
 import org.enzenberger.control.selectionWindow.SelectionWindowController;
 import org.enzenberger.model.Board;
 import org.enzenberger.model.Game;
@@ -21,6 +22,7 @@ public class MainApp extends Application {
     private AnchorPane rootLayout;
     private StackPane selectionWindow;
     private final Game game;
+    private GameController gameController;
 
     public static void main(String[] args) {
         launch(args);
@@ -28,6 +30,8 @@ public class MainApp extends Application {
 
     public MainApp() {
         this.game = new Game();
+        this.gameController = new GameController();
+        this.gameController.setGame(this.game);
     }
 
     @Override
@@ -60,6 +64,7 @@ public class MainApp extends Application {
         BoardView boardView = BoardView.getInstance();
         boardView.setScene(this.primaryStage.getScene());
         boardView.setGame(this.game);
+        boardView.setBoardClickListener(this.gameController);
         this.rootLayout.getChildren().add(boardView.getBoardGroup());
     }
 
@@ -87,6 +92,7 @@ public class MainApp extends Application {
             loadWindowResource(resourceName);
             this.rootLayout.getChildren().set(this.rootLayout.getChildren().size()-1, this.selectionWindow);
         }
+        this.selectionWindow.visibleProperty().set(true);
     }
 
     private void loadWindowResource(String resourceName){
@@ -114,10 +120,10 @@ public class MainApp extends Application {
 
     public void hideSelectionWindow() {
         selectionWindow.visibleProperty().set(false);
-        System.out.println("SelectionWindow hidden");
     }
 
     public void startGame() {
+        hideSelectionWindow();
         //todo
     }
 }

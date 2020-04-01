@@ -11,11 +11,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
-import org.enzenberger.control.BoardController;
-import org.enzenberger.control.GameController;
-import org.enzenberger.model.player.Player;
+import org.enzenberger.control.BoardClickListener;
 import org.enzenberger.model.Board;
 import org.enzenberger.model.Game;
+import org.enzenberger.model.player.Player;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -23,9 +22,7 @@ import java.util.List;
 public class BoardView {
     private static BoardView instance;
 
-    private BoardController boardController;
     private Game game;
-    private GameController gameController;
 
     private Group boardView;
     private Scene scene;
@@ -37,10 +34,9 @@ public class BoardView {
     private Circle referenceStone;
 
     private List<Rectangle> columnButtons;
+    private BoardClickListener boardClickListener;
 
     private BoardView() {
-        this.boardController = new BoardController();
-        this.gameController = new GameController();
         this.boardView = new Group();
         this.referenceStone = new Circle();
         this.columnButtons = new LinkedList<>();
@@ -57,12 +53,15 @@ public class BoardView {
         return instance;
     }
 
+    public void setBoardClickListener(BoardClickListener boardClickListener){
+        this.boardClickListener = boardClickListener;
+    }
+
     public void setGame(Game game) {
         this.game = game;
-        this.boardController.setBoard(this.game.getBoard());
         for (int width=0; width<Board.columnCount; width++){
             int column = width;
-            this.columnButtons.get(width).setOnMouseClicked(click -> gameController.onColumnClicked(column, this.boardController));
+            this.columnButtons.get(width).setOnMouseClicked(click -> boardClickListener.onColumnClicked(column));
             for (int height=0; height<Board.rowCount; height++){
                 int xPosition = width;
                 int yPosition = height;
