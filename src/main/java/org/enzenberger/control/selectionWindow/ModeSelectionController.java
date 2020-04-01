@@ -3,29 +3,32 @@ package org.enzenberger.control.selectionWindow;
 import javafx.fxml.FXML;
 import org.enzenberger.model.mode.ClassicGameMode;
 import org.enzenberger.model.mode.ForeverGameMode;
+import org.enzenberger.model.mode.GameMode;
 import org.enzenberger.model.mode.TimeGameMode;
 
-public class ModeSelectionController extends SelectionWindow{
+public class ModeSelectionController extends SelectionWindowController {
     @FXML
     private void setGameModeClassic(){
-        this.game.setGameMode(new ClassicGameMode());
-        this.mainApp.hideSelectionWindow();
+        setGameMode(new ClassicGameMode());
     }
 
     @FXML
     private void setGameModeTime(){
-        this.game.setGameMode(new TimeGameMode());
-        this.mainApp.hideSelectionWindow();
+        setGameMode(new TimeGameMode());
     }
 
     @FXML
     private void setGameModeForever(){
-        this.game.setGameMode(new ForeverGameMode());
-        this.mainApp.hideSelectionWindow();
+        setGameMode(new ForeverGameMode());
     }
 
     @FXML
     private void goBack(){
         this.mainApp.showPlayerSelection();
+    }
+
+    private void setGameMode(GameMode gameMode){
+        this.game.setGameMode(new ForeverGameMode());
+        this.mainApp.hideSelectionWindow();
     }
 }

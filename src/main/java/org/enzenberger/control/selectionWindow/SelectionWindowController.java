@@ -3,7 +3,7 @@ package org.enzenberger.control.selectionWindow;
 import org.enzenberger.MainApp;
 import org.enzenberger.model.Game;
 
-public abstract class SelectionWindow {
+public abstract class SelectionWindowController {
     Game game;
     MainApp mainApp;
 

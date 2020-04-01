@@ -11,9 +11,9 @@
         <padding>
             <Insets bottom="16.0" left="64.0" right="64.0" top="16.0" />
         </padding>
-        <Button maxWidth="Infinity" text="Easy" />
-        <Button maxWidth="Infinity" text="Medium" />
-        <Button maxWidth="Infinity" text="Hard" />
-        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goBack" text="exit" />
+        <Button maxWidth="Infinity" onAction="#setVirtualPlayerEasy" text="Easy" />
+        <Button maxWidth="Infinity" onAction="#setVirtualPlayerMedium" text="Medium" />
+        <Button maxWidth="Infinity" onAction="#setVirtualPlayerHard" text="Hard" />
+        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goBack" text="back" />
     </VBox>
 </StackPane>

@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import org.enzenberger.model.player.LocalPlayer;
 import org.enzenberger.model.player.RemotePlayer;
 
-public class PlayerSelectionController extends SelectionWindow{
+public class PlayerSelectionController extends SelectionWindowController {
     @FXML
     private void setSinglePlayerMode(){
         this.game.setPlayer1(new LocalPlayer(Color.BLUE));

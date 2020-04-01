@@ -7,7 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import org.enzenberger.control.selectionWindow.SelectionWindow;
+import org.enzenberger.control.selectionWindow.SelectionWindowController;
+import org.enzenberger.model.Board;
 import org.enzenberger.model.Game;
 import org.enzenberger.view.BoardView;
 
@@ -18,7 +19,7 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private AnchorPane rootLayout;
-
+    private StackPane selectionWindow;
     private final Game game;
 
     public static void main(String[] args) {
@@ -47,6 +48,8 @@ public class MainApp extends Application {
 
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
+            primaryStage.setMinWidth(Board.columnCount * 50);
+            primaryStage.setMinHeight(Board.rowCount * 50);
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -76,12 +79,22 @@ public class MainApp extends Application {
         showWindow("VirtualPlayerSelection.fxml");
     }
 
-    private void showWindow(String resourceName){
+    private void showWindow(String resourceName) {
+        if (this.selectionWindow==null) {
+            loadWindowResource(resourceName);
+            this.rootLayout.getChildren().add(selectionWindow);
+        } else {
+            loadWindowResource(resourceName);
+            this.rootLayout.getChildren().set(this.rootLayout.getChildren().size()-1, this.selectionWindow);
+        }
+    }
+
+    private void loadWindowResource(String resourceName){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource(resourceName));
-            StackPane selectionWindow = loader.load();
-            SelectionWindow selectionWindowController = loader.getController();
+            selectionWindow = loader.load();
+            SelectionWindowController selectionWindowController = loader.getController();
             selectionWindowController.setGame(this.game);
             selectionWindowController.setMainApp(this);
 
@@ -90,18 +103,21 @@ public class MainApp extends Application {
             selectionWindow.setPrefWidth(rootLayout.getWidth());
             rootLayout.widthProperty().addListener(observable -> selectionWindow.setPrefWidth(rootLayout.getWidth()));
             rootLayout.heightProperty().addListener(observable -> selectionWindow.setPrefHeight(rootLayout.getHeight()));
-
-            this.rootLayout.getChildren().add(selectionWindow);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void exit(){
+    public void exit() {
         this.primaryStage.close();
     }
 
     public void hideSelectionWindow() {
+        selectionWindow.visibleProperty().set(false);
+        System.out.println("SelectionWindow hidden");
+    }
+
+    public void startGame() {
         //todo
     }
 }
