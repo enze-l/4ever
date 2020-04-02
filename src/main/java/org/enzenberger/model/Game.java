@@ -24,6 +24,13 @@ public class Game {
         this.currentPlayer = currentPlayer;
     }
 
+    public Player getOpponent(Player player) {
+        if (player.equals(player1)) return player2;
+        else {
+            return player1;
+        }
+    }
+
     public void resetBoard() {
         this.board = new Board();
     }
@@ -56,7 +63,7 @@ public class Game {
         this.gameMode = gameMode;
     }
 
-    public void setGameActive(boolean active){
+    public void setGameActive(boolean active) {
         this.gameActive.setValue(active);
     }
 

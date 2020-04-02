@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -73,6 +74,7 @@ public class MainApp extends Application {
      */
     private void initKeyPressedListeners() {
         this.scene.setOnKeyReleased(keyEvent -> handleKeyEvent(keyEvent.getCode()));
+        this.primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
     }
 
     /**
@@ -105,7 +107,15 @@ public class MainApp extends Application {
             case DIGIT7:
                 this.gameController.onColumnClicked(6);
                 break;
+            case F11:
+                toggleFullscreen();
+
         }
+    }
+
+    private void toggleFullscreen(){
+        if (this.primaryStage.isFullScreen())this.primaryStage.setFullScreen(false);
+        else this.primaryStage.setFullScreen(true);
     }
 
     /**
@@ -244,5 +254,6 @@ public class MainApp extends Application {
     public void startGame() {
         hideSelectionWindow();
         //todo
+        this.game.setCurrentPlayer(this.game.getPlayer1());
     }
 }

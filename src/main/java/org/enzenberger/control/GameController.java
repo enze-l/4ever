@@ -1,9 +1,7 @@
 package org.enzenberger.control;
 
-import javafx.scene.paint.Color;
 import org.enzenberger.exceptions.ColumnOverflowException;
 import org.enzenberger.model.Game;
-import org.enzenberger.model.player.LocalPlayer;
 
 public class GameController implements BoardClickListener{
     private Game game;
@@ -19,9 +17,14 @@ public class GameController implements BoardClickListener{
 
     public void onColumnClicked(int column) {
         try {
-            boardController.dropStone(new LocalPlayer(Color.BLUE), column);
+            boardController.dropStone(this.game.getCurrentPlayer(), column);
+            changeActivePlayer();
         } catch (ColumnOverflowException e) {
             e.printStackTrace();
         }
+    }
+
+    private void changeActivePlayer(){
+        this.game.setCurrentPlayer(this.game.getOpponent(this.game.getCurrentPlayer()));
     }
 }
