@@ -16,23 +16,33 @@ import org.enzenberger.view.BoardView;
 import java.io.IOException;
 import java.util.Stack;
 
+/**
+ * Class to start game and bring objects into relation with each other
+ *
+ */
 public class MainApp extends Application {
 
-
     private Stage primaryStage;
+    private Scene scene;
     private AnchorPane rootLayout;
+
     private StackPane selectionWindow;
     private Stack<String> selectionWindowOrder;
 
     private final Game game;
-    private GameController gameController;
-    private Scene scene;
+    private final GameController gameController;
 
-
+    /**
+     * Starting the app is done trough this method
+     * @param args parameters passed to the application
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * Constructor used for creating all Objects that are de facto final
+     */
     public MainApp() {
         this.game = new Game();
         this.gameController = new GameController();
@@ -40,6 +50,10 @@ public class MainApp extends Application {
         this.selectionWindowOrder = new Stack<>();
     }
 
+    /**
+     * JavaFX GUI is initialized
+     * @param primaryStage the window in which content can be displayed
+     */
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -47,14 +61,21 @@ public class MainApp extends Application {
 
         initRootLayout();
         initKeyPressedListeners();
-        showBoard();
+        initBoard();
         showPlayerSelection();
+        primaryStage.show();
     }
 
+    /**
+     * Setting KeyTypedListeners
+     */
     private void initKeyPressedListeners() {
-        this.scene.setOnKeyTyped(keyEvent -> showPreviousSelection());
+        this.scene.setOnKeyTyped(keyEvent -> handleGoBackAction());
     }
 
+    /**
+     * Loading and the root-layout
+     */
     private void initRootLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -65,13 +86,15 @@ public class MainApp extends Application {
             primaryStage.setScene(scene);
             primaryStage.setMinWidth(Board.columnCount * 50);
             primaryStage.setMinHeight(Board.rowCount * 50);
-            primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void showBoard() {
+    /**
+     * Initializing the Board View and Controller
+     */
+    private void initBoard() {
         BoardView boardView = BoardView.getInstance();
         boardView.setScene(this.primaryStage.getScene());
         boardView.setGame(this.game);
@@ -79,36 +102,57 @@ public class MainApp extends Application {
         this.rootLayout.getChildren().add(boardView.getBoardGroup());
     }
 
+    /**
+     * showing a menu to select the player configuration
+     */
     public void showPlayerSelection() {
-        showWindow("PlayerSelection.fxml");
+        showWindowMenu("PlayerSelection.fxml");
     }
 
+    /**
+     * showing a menu to select the gaming mode
+     */
     public void showModeSelection() {
-        showWindow("ModeSelection.fxml");
+        showWindowMenu("ModeSelection.fxml");
     }
 
+    /**
+     * showing a panel to manage online-connections
+     */
     public void showConnectionPanel() {
-        showWindow("ConnectionPanel.fxml");
+        showWindowMenu("ConnectionPanel.fxml");
     }
 
+    /**
+     * showing a panel to chose the difficulty of the virtual opponent
+     */
     public void showVirtualPlayerSelection() {
-        showWindow("VirtualPlayerSelection.fxml");
+        showWindowMenu("VirtualPlayerSelection.fxml");
     }
 
-    public void showPreviousSelection() {
+    /**
+     * Handling a goBack action is done here. If the board is in focus it shows the menu.
+     * Inside a menu it shows the hierarchical previous menu.
+     * If the last menu is displayed, it closes the App
+     */
+    public void handleGoBackAction() {
         if (this.selectionWindow.isVisible()) {
             this.selectionWindowOrder.pop();
             if (this.selectionWindowOrder.empty()) {
                 this.exit();
             } else {
-                showWindow(this.selectionWindowOrder.pop());
+                showWindowMenu(this.selectionWindowOrder.pop());
             }
         }else {
             this.selectionWindow.setVisible(true);
         }
     }
 
-    private void showWindow(String resourceName) {
+    /**
+     * Enables to show a menu by using it's fxml layout name
+     * @param resourceName the name of the fxml resource file
+     */
+    private void showWindowMenu(String resourceName) {
         if (this.selectionWindow == null) {
             loadWindowResource(resourceName);
             this.rootLayout.getChildren().add(selectionWindow);
@@ -120,6 +164,10 @@ public class MainApp extends Application {
         this.selectionWindowOrder.push(resourceName);
     }
 
+    /**
+     * loading a fxml resource and configuring it to be correctly displayed
+     * @param resourceName the name of the fxml-file
+     */
     private void loadWindowResource(String resourceName) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -139,14 +187,23 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * CLosing the App and handling relevant clean up
+     */
     public void exit() {
         this.primaryStage.close();
     }
 
+    /**
+     * hiding the current selectionWindow is done here
+     */
     public void hideSelectionWindow() {
         selectionWindow.visibleProperty().set(false);
     }
 
+    /**
+     * Starting a game
+     */
     public void startGame() {
         hideSelectionWindow();
         //todo

@@ -18,6 +18,6 @@ public abstract class SelectionWindowController {
 
     @FXML
     public void goBack(){
-        this.mainApp.showPreviousSelection();
+        this.mainApp.handleGoBackAction();
     }
 }
