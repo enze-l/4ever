@@ -8,11 +8,20 @@ public class Game {
     private Board board;
     private Player player1;
     private Player player2;
+    private Player currentPlayer;
     private GameMode gameMode;
     private SimpleBooleanProperty gameActive;
 
     public Game() {
         this.board = new Board();
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     public void resetBoard() {
