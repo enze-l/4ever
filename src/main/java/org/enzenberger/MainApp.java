@@ -68,10 +68,17 @@ public class MainApp extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Registering Scene as KeyPressedListener
+     */
     private void initKeyPressedListeners() {
         this.scene.setOnKeyReleased(keyEvent -> handleKeyEvent(keyEvent.getCode()));
     }
 
+    /**
+     * Handling Key Events
+     * @param code the code of the key being pressed
+     */
     private void handleKeyEvent(KeyCode code) {
         switch (code) {
             case ESCAPE:
@@ -99,29 +106,6 @@ public class MainApp extends Application {
                 this.gameController.onColumnClicked(6);
                 break;
         }
-    }
-
-    /**
-     * Setting KeyTypedListeners
-     */
-//    private void initKeyPressedListeners() {
-//        this.scene.setOnKeyReleased(keyEvent -> {
-//            if (keyEvent.getCode() == KeyCode.ESCAPE)
-//                handleGoBackAction();
-//        });
-//        handleColumnKeyPressed(KeyCode.DIGIT1, 0);
-//        handleColumnKeyPressed(KeyCode.DIGIT2, 1);
-//        handleColumnKeyPressed(KeyCode.DIGIT3, 2);
-//        handleColumnKeyPressed(KeyCode.DIGIT4, 3);
-//        handleColumnKeyPressed(KeyCode.DIGIT5, 4);
-//        handleColumnKeyPressed(KeyCode.DIGIT6, 5);
-//        handleColumnKeyPressed(KeyCode.DIGIT7, 6);
-//    }
-    private void handleColumnKeyPressed(KeyCode keyCode, int column) {
-        this.scene.setOnKeyReleased(keyEvent -> {
-            if (keyEvent.getCode() == keyCode)
-                this.gameController.onColumnClicked(column);
-        });
     }
 
     /**
