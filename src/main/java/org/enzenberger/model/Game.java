@@ -1,5 +1,6 @@
 package org.enzenberger.model;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import org.enzenberger.model.mode.GameMode;
 import org.enzenberger.model.player.Player;
 
@@ -8,13 +9,14 @@ public class Game {
     private Player player1;
     private Player player2;
     private GameMode gameMode;
+    private SimpleBooleanProperty gameActive;
 
-    public Game(){
+    public Game() {
         this.board = new Board();
     }
 
-    public void setBoard(Board board) {
-        this.board = board;
+    public void resetBoard() {
+        this.board = new Board();
     }
 
     public void setPlayer1(Player player1) {
@@ -25,11 +27,35 @@ public class Game {
         this.player2 = player2;
     }
 
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
     public Board getBoard() {
         return this.board;
     }
 
     public void setGameMode(GameMode gameMode) {
         this.gameMode = gameMode;
+    }
+
+    public void setGameActive(boolean active){
+        this.gameActive.setValue(active);
+    }
+
+    public boolean isGameActive() {
+        return gameActive.get();
+    }
+
+    public SimpleBooleanProperty gameActiveProperty() {
+        return gameActive;
     }
 }
