@@ -26,6 +26,7 @@ public class MainApp extends Application {
 
     private final Game game;
     private GameController gameController;
+    private Scene scene;
 
 
     public static void main(String[] args) {
@@ -45,8 +46,13 @@ public class MainApp extends Application {
         this.primaryStage.setTitle("4ever");
 
         initRootLayout();
+        initKeyPressedListeners();
         showBoard();
         showPlayerSelection();
+    }
+
+    private void initKeyPressedListeners() {
+        this.scene.setOnKeyTyped(keyEvent -> showPreviousSelection());
     }
 
     private void initRootLayout() {
@@ -55,7 +61,7 @@ public class MainApp extends Application {
             loader.setLocation(getClass().getResource("RootLayout.fxml"));
             rootLayout = loader.load();
 
-            Scene scene = new Scene(rootLayout);
+            this.scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.setMinWidth(Board.columnCount * 50);
             primaryStage.setMinHeight(Board.rowCount * 50);
@@ -90,11 +96,15 @@ public class MainApp extends Application {
     }
 
     public void showPreviousSelection() {
-        this.selectionWindowOrder.pop();
-        if (this.selectionWindowOrder.empty()) {
-            this.exit();
-        } else {
-            showWindow(this.selectionWindowOrder.pop());
+        if (this.selectionWindow.isVisible()) {
+            this.selectionWindowOrder.pop();
+            if (this.selectionWindowOrder.empty()) {
+                this.exit();
+            } else {
+                showWindow(this.selectionWindowOrder.pop());
+            }
+        }else {
+            this.selectionWindow.setVisible(true);
         }
     }
 
