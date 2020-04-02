@@ -25,9 +25,4 @@ public class PlayerSelectionController extends SelectionWindowController {
         this.game.setPlayer2(new RemotePlayer(Color.RED));
         this.mainApp.showConnectionPanel();
     }
-
-    @FXML
-    private void exitGame(){
-        this.mainApp.exit();
-    }
 }

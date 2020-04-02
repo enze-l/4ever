@@ -26,9 +26,4 @@ public class VirtualPlayerSelectionController extends SelectionWindowController 
         this.game.setPlayer2(virtualPlayer);
         this.mainApp.showModeSelection();
     }
-
-    @FXML
-    private void goBack() {
-        this.mainApp.showPlayerSelection();
-    }
 }

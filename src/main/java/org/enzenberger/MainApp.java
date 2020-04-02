@@ -14,6 +14,7 @@ import org.enzenberger.model.Game;
 import org.enzenberger.view.BoardView;
 
 import java.io.IOException;
+import java.util.Stack;
 
 public class MainApp extends Application {
 
@@ -21,8 +22,11 @@ public class MainApp extends Application {
     private Stage primaryStage;
     private AnchorPane rootLayout;
     private StackPane selectionWindow;
+    private Stack<String> selectionWindowOrder;
+
     private final Game game;
     private GameController gameController;
+
 
     public static void main(String[] args) {
         launch(args);
@@ -32,6 +36,7 @@ public class MainApp extends Application {
         this.game = new Game();
         this.gameController = new GameController();
         this.gameController.setGame(this.game);
+        this.selectionWindowOrder = new Stack<>();
     }
 
     @Override
@@ -84,18 +89,28 @@ public class MainApp extends Application {
         showWindow("VirtualPlayerSelection.fxml");
     }
 
+    public void showPreviousSelection() {
+        this.selectionWindowOrder.pop();
+        if (this.selectionWindowOrder.empty()) {
+            this.exit();
+        } else {
+            showWindow(this.selectionWindowOrder.pop());
+        }
+    }
+
     private void showWindow(String resourceName) {
-        if (this.selectionWindow==null) {
+        if (this.selectionWindow == null) {
             loadWindowResource(resourceName);
             this.rootLayout.getChildren().add(selectionWindow);
         } else {
             loadWindowResource(resourceName);
-            this.rootLayout.getChildren().set(this.rootLayout.getChildren().size()-1, this.selectionWindow);
+            this.rootLayout.getChildren().set(this.rootLayout.getChildren().size() - 1, this.selectionWindow);
         }
         this.selectionWindow.visibleProperty().set(true);
+        this.selectionWindowOrder.push(resourceName);
     }
 
-    private void loadWindowResource(String resourceName){
+    private void loadWindowResource(String resourceName) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource(resourceName));

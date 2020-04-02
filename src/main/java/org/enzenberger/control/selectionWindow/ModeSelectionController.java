@@ -22,11 +22,6 @@ public class ModeSelectionController extends SelectionWindowController {
         setGameMode(new ForeverGameMode());
     }
 
-    @FXML
-    private void goBack(){
-        this.mainApp.showPlayerSelection();
-    }
-
     private void setGameMode(GameMode gameMode){
         this.game.setGameMode(new ForeverGameMode());
         this.mainApp.startGame();
