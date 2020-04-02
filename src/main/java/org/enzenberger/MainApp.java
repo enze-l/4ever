@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -18,7 +19,6 @@ import java.util.Stack;
 
 /**
  * Class to start game and bring objects into relation with each other
- *
  */
 public class MainApp extends Application {
 
@@ -34,6 +34,7 @@ public class MainApp extends Application {
 
     /**
      * Starting the app is done trough this method
+     *
      * @param args parameters passed to the application
      */
     public static void main(String[] args) {
@@ -52,6 +53,7 @@ public class MainApp extends Application {
 
     /**
      * JavaFX GUI is initialized
+     *
      * @param primaryStage the window in which content can be displayed
      */
     @Override
@@ -66,11 +68,60 @@ public class MainApp extends Application {
         primaryStage.show();
     }
 
+    private void initKeyPressedListeners() {
+        this.scene.setOnKeyReleased(keyEvent -> handleKeyEvent(keyEvent.getCode()));
+    }
+
+    private void handleKeyEvent(KeyCode code) {
+        switch (code) {
+            case ESCAPE:
+                handleGoBackAction();
+                break;
+            case DIGIT1:
+                this.gameController.onColumnClicked(0);
+                break;
+            case DIGIT2:
+                this.gameController.onColumnClicked(1);
+                break;
+            case DIGIT3:
+                this.gameController.onColumnClicked(2);
+                break;
+            case DIGIT4:
+                this.gameController.onColumnClicked(3);
+                break;
+            case DIGIT5:
+                this.gameController.onColumnClicked(4);
+                break;
+            case DIGIT6:
+                this.gameController.onColumnClicked(5);
+                break;
+            case DIGIT7:
+                this.gameController.onColumnClicked(6);
+                break;
+        }
+    }
+
     /**
      * Setting KeyTypedListeners
      */
-    private void initKeyPressedListeners() {
-        this.scene.setOnKeyTyped(keyEvent -> handleGoBackAction());
+//    private void initKeyPressedListeners() {
+//        this.scene.setOnKeyReleased(keyEvent -> {
+//            if (keyEvent.getCode() == KeyCode.ESCAPE)
+//                handleGoBackAction();
+//        });
+//        handleColumnKeyPressed(KeyCode.DIGIT1, 0);
+//        handleColumnKeyPressed(KeyCode.DIGIT2, 1);
+//        handleColumnKeyPressed(KeyCode.DIGIT3, 2);
+//        handleColumnKeyPressed(KeyCode.DIGIT4, 3);
+//        handleColumnKeyPressed(KeyCode.DIGIT5, 4);
+//        handleColumnKeyPressed(KeyCode.DIGIT6, 5);
+//        handleColumnKeyPressed(KeyCode.DIGIT7, 6);
+//    }
+    private void handleColumnKeyPressed(KeyCode keyCode, int column) {
+        this.scene.setOnKeyReleased(keyEvent -> {
+            if (keyEvent.getCode() == keyCode)
+                this.gameController.onColumnClicked(column);
+        });
     }
 
     /**
@@ -143,13 +194,14 @@ public class MainApp extends Application {
             } else {
                 showWindowMenu(this.selectionWindowOrder.pop());
             }
-        }else {
+        } else {
             this.selectionWindow.setVisible(true);
         }
     }
 
     /**
      * Enables to show a menu by using it's fxml layout name
+     *
      * @param resourceName the name of the fxml resource file
      */
     private void showWindowMenu(String resourceName) {
@@ -166,6 +218,7 @@ public class MainApp extends Application {
 
     /**
      * loading a fxml resource and configuring it to be correctly displayed
+     *
      * @param resourceName the name of the fxml-file
      */
     private void loadWindowResource(String resourceName) {

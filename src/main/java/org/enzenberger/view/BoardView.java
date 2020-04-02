@@ -53,16 +53,16 @@ public class BoardView {
         return instance;
     }
 
-    public void setBoardClickListener(BoardClickListener boardClickListener){
+    public void setBoardClickListener(BoardClickListener boardClickListener) {
         this.boardClickListener = boardClickListener;
     }
 
     public void setGame(Game game) {
         this.game = game;
-        for (int width=0; width<Board.columnCount; width++){
+        for (int width = 0; width < Board.columnCount; width++) {
             int column = width;
             this.columnButtons.get(width).setOnMouseClicked(click -> boardClickListener.onColumnClicked(column));
-            for (int height=0; height<Board.rowCount; height++){
+            for (int height = 0; height < Board.rowCount; height++) {
                 int xPosition = width;
                 int yPosition = height;
                 this.game.getBoard().getFieldProperty(width, height).addListener(
