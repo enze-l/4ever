@@ -15,24 +15,37 @@ public class Board {
 
     List<List<Property<Player>>> fields;
     List<List<Player>> groundTruth;
-
     List<FourInARowDetector> rows;
 
     public Board() {
         fields = new ArrayList<>();
         groundTruth = new ArrayList<>();
+        this.rows = new LinkedList<>();
+        initFields();
+        initFourInARowDetectors();
+    }
+
+    private void initFields(){
         for (int row = 0; row < rowCount; row++) {
             fields.add(new ArrayList<>());
             groundTruth.add(new ArrayList<>());
             for (int column = 0; column < columnCount; column++) {
                 fields.get(row).add(new SimpleObjectProperty<>(null));
                 groundTruth.get(row).add(null);
-                addFourInARowDetectors(column, row);
             }
         }
     }
 
-    private void addFourInARowDetectors(int column, int row) {
+    private void initFourInARowDetectors() {
+
+        for (int row = 0; row < rowCount; row++) {
+            for (int column = 0; column < columnCount; column++) {
+                addFourInARowDetectorsForField(column, row);
+            }
+        }
+    }
+
+    private void addFourInARowDetectorsForField(int column, int row) {
         addFourUp(column, row);
         addFourDown(column, row);
         addFourHorizontal(column, row);
