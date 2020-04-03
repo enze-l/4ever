@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import org.enzenberger.model.player.Player;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Board {
@@ -15,7 +16,7 @@ public class Board {
     List<List<Property<Player>>> fields;
     List<List<Player>> groundTruth;
 
-    List<FourInARow> rows;
+    List<FourInARowDetector> rows;
 
     public Board() {
         fields = new ArrayList<>();
@@ -26,7 +27,55 @@ public class Board {
             for (int column = 0; column < columnCount; column++) {
                 fields.get(row).add(new SimpleObjectProperty<>(null));
                 groundTruth.get(row).add(null);
+                addFourInARowDetectors(column, row);
             }
+        }
+    }
+
+    private void addFourInARowDetectors(int column, int row) {
+        addFourUp(column, row);
+        addFourDown(column, row);
+        addFourHorizontal(column, row);
+        addFourVertical(column, row);
+    }
+
+    private void addFourVertical(int column, int row) {
+        if (row<rowCount-3){
+            List<Property<Player>> fourRowFields = new LinkedList<>();
+            for (int field = 0; field<4; field++){
+                fourRowFields.add(this.fields.get(row+field).get(column));
+            }
+            this.rows.add(new FourInARowDetector(column, row, fourRowFields));
+        }
+    }
+
+    private void addFourHorizontal(int column, int row) {
+        if (column<columnCount-3){
+            List<Property<Player>> fourRowFields = new LinkedList<>();
+            for (int field = 0; field<4; field++){
+                fourRowFields.add(this.fields.get(row).get(column+field));
+            }
+            this.rows.add(new FourInARowDetector(column, row, fourRowFields));
+        }
+    }
+
+    private void addFourDown(int column, int row) {
+        if (column<columnCount-3 && row<rowCount-3){
+            List<Property<Player>> fourRowFields = new LinkedList<>();
+            for (int field = 0; field<4; field++){
+                fourRowFields.add(this.fields.get(row+field).get(column+field));
+            }
+            this.rows.add(new FourInARowDetector(column, row, fourRowFields));
+        }
+    }
+
+    private void addFourUp(int column, int row) {
+        if (column<columnCount-3 && row>3){
+            List<Property<Player>> fourRowFields = new LinkedList<>();
+            for (int field=0; field<4; field++){
+                fourRowFields.add(this.fields.get(row-field).get(column+field));
+            }
+            this.rows.add(new FourInARowDetector(column, row, fourRowFields));
         }
     }
 
