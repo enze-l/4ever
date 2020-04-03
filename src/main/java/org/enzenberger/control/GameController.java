@@ -3,13 +3,14 @@ package org.enzenberger.control;
 import org.enzenberger.exceptions.ColumnOverflowException;
 import org.enzenberger.model.Game;
 
-public class GameController implements BoardClickListener{
+public class GameController implements BoardClickListener {
     private Game game;
     private BoardController boardController;
 
-    public GameController(){}
+    public GameController() {
+    }
 
-    public void setGame(Game game){
+    public void setGame(Game game) {
         this.game = game;
         this.boardController = new BoardController();
         this.boardController.setBoard(this.game.getBoard());
@@ -19,12 +20,11 @@ public class GameController implements BoardClickListener{
         try {
             boardController.dropStone(this.game.getCurrentPlayer(), column);
             changeActivePlayer();
-        } catch (ColumnOverflowException e) {
-            e.printStackTrace();
+        } catch (ColumnOverflowException ignored) {
         }
     }
 
-    private void changeActivePlayer(){
+    private void changeActivePlayer() {
         this.game.setCurrentPlayer(this.game.getOpponent(this.game.getCurrentPlayer()));
     }
 }

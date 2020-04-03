@@ -15,14 +15,15 @@ public class Board {
     List<List<Property<Player>>> fields;
     List<List<Player>> groundTruth;
 
+    List<FourInARow> rows;
 
-    public Board(){
+    public Board() {
         fields = new ArrayList<>();
         groundTruth = new ArrayList<>();
-        for (int row = 0; row<rowCount; row++){
+        for (int row = 0; row < rowCount; row++) {
             fields.add(new ArrayList<>());
             groundTruth.add(new ArrayList<>());
-            for (int column = 0; column<columnCount; column++){
+            for (int column = 0; column < columnCount; column++) {
                 fields.get(row).add(new SimpleObjectProperty<>(null));
                 groundTruth.get(row).add(null);
             }
@@ -33,12 +34,12 @@ public class Board {
         return fields.get(height).get(width).getValue();
     }
 
-    public void setField(Player player, int width, int height){
+    public void setField(Player player, int width, int height) {
         fields.get(height).get(width).setValue(player);
         groundTruth.get(height).set(width, player);
     }
 
-    public Property<Player> getFieldProperty(int width, int height){
+    public Property<Player> getFieldProperty(int width, int height) {
         return fields.get(height).get(width);
     }
 }
