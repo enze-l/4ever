@@ -15,7 +15,8 @@ public class Board {
 
     List<List<Property<Player>>> fields;
     List<List<Player>> groundTruth;
-    List<FourInARowDetector> rows;
+
+    List<FourStonesCombination> rows;
 
     public Board() {
         fields = new ArrayList<>();
@@ -25,7 +26,13 @@ public class Board {
         initFourInARowDetectors();
     }
 
-    private void initFields(){
+    public void setWinListener(WinListener winListener){
+        for (FourStonesCombination combination:rows){
+            combination.setWinListener(winListener);
+        }
+    }
+
+    private void initFields() {
         for (int row = 0; row < rowCount; row++) {
             fields.add(new ArrayList<>());
             groundTruth.add(new ArrayList<>());
@@ -37,7 +44,6 @@ public class Board {
     }
 
     private void initFourInARowDetectors() {
-
         for (int row = 0; row < rowCount; row++) {
             for (int column = 0; column < columnCount; column++) {
                 addFourInARowDetectorsForField(column, row);
@@ -53,42 +59,42 @@ public class Board {
     }
 
     private void addFourVertical(int column, int row) {
-        if (row<rowCount-3){
+        if (row < rowCount - 3) {
             List<Property<Player>> fourRowFields = new LinkedList<>();
-            for (int field = 0; field<4; field++){
-                fourRowFields.add(this.fields.get(row+field).get(column));
+            for (int field = 0; field < 4; field++) {
+                fourRowFields.add(this.fields.get(row + field).get(column));
             }
-            this.rows.add(new FourInARowDetector(column, row, fourRowFields));
+            this.rows.add(new FourStonesCombination(CombOrientation.VERTICAL, column, row, fourRowFields));
         }
     }
 
     private void addFourHorizontal(int column, int row) {
-        if (column<columnCount-3){
+        if (column < columnCount - 3) {
             List<Property<Player>> fourRowFields = new LinkedList<>();
-            for (int field = 0; field<4; field++){
-                fourRowFields.add(this.fields.get(row).get(column+field));
+            for (int field = 0; field < 4; field++) {
+                fourRowFields.add(this.fields.get(row).get(column + field));
             }
-            this.rows.add(new FourInARowDetector(column, row, fourRowFields));
+            this.rows.add(new FourStonesCombination(CombOrientation.HORIZONTAL, column, row, fourRowFields));
         }
     }
 
     private void addFourDown(int column, int row) {
-        if (column<columnCount-3 && row<rowCount-3){
+        if (column < columnCount - 3 && row < rowCount - 3) {
             List<Property<Player>> fourRowFields = new LinkedList<>();
-            for (int field = 0; field<4; field++){
-                fourRowFields.add(this.fields.get(row+field).get(column+field));
+            for (int field = 0; field < 4; field++) {
+                fourRowFields.add(this.fields.get(row + field).get(column + field));
             }
-            this.rows.add(new FourInARowDetector(column, row, fourRowFields));
+            this.rows.add(new FourStonesCombination(CombOrientation.RIGHT_DOWN, column, row, fourRowFields));
         }
     }
 
     private void addFourUp(int column, int row) {
-        if (column<columnCount-3 && row>3){
+        if (column < columnCount - 3 && row > 3) {
             List<Property<Player>> fourRowFields = new LinkedList<>();
-            for (int field=0; field<4; field++){
-                fourRowFields.add(this.fields.get(row-field).get(column+field));
+            for (int field = 0; field < 4; field++) {
+                fourRowFields.add(this.fields.get(row - field).get(column + field));
             }
-            this.rows.add(new FourInARowDetector(column, row, fourRowFields));
+            this.rows.add(new FourStonesCombination(CombOrientation.RIGHT_UP, column, row, fourRowFields));
         }
     }
 

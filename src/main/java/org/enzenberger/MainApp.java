@@ -253,7 +253,7 @@ public class MainApp extends Application {
      */
     public void startGame() {
         hideSelectionWindow();
-        //todo
         this.game.setCurrentPlayer(this.game.getPlayer1());
+        this.game.setGameActive(true);
     }
 }

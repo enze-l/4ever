@@ -14,6 +14,7 @@ public class Game {
 
     public Game() {
         this.board = new Board();
+        this.gameActive = new SimpleBooleanProperty(false);
     }
 
     public Player getCurrentPlayer() {
@@ -67,7 +68,7 @@ public class Game {
         this.gameActive.setValue(active);
     }
 
-    public boolean isGameActive() {
+    public boolean gameActive() {
         return gameActive.get();
     }
 
