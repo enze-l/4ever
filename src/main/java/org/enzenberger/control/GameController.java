@@ -1,10 +1,7 @@
 package org.enzenberger.control;
 
 import org.enzenberger.exceptions.ColumnOverflowException;
-import org.enzenberger.model.CombOrientation;
-import org.enzenberger.model.Game;
-import org.enzenberger.model.GameState;
-import org.enzenberger.model.WinListener;
+import org.enzenberger.model.*;
 import org.enzenberger.model.player.Player;
 
 public class GameController implements BoardClickListener, WinListener {
@@ -44,5 +41,18 @@ public class GameController implements BoardClickListener, WinListener {
     public void startGame() {
         if (this.game.getGameState() == GameState.PAUSED)
             this.game.setGameState(GameState.PLAYING);
+    }
+
+    public void stopGame() {
+        this.game.setGameState(GameState.STOPPED);
+    }
+
+    public void pauseGame() {
+        this.game.setGameState(GameState.PAUSED);
+    }
+
+    public void restartGame(){
+        this.game.resetBoard();
+        this.game.setGameState(GameState.PLAYING);
     }
 }
