@@ -23,7 +23,7 @@ public class GameController implements BoardClickListener, WinListener {
 
     @Override
     public void onColumnClicked(int column) {
-        if (this.game.getGameState()== GameState.PLAYING) {
+        if (this.game.getGameState() == GameState.PLAYING) {
             try {
                 boardController.dropStone(this.game.getCurrentPlayer(), column);
                 changeActivePlayer();
@@ -39,5 +39,10 @@ public class GameController implements BoardClickListener, WinListener {
     @Override
     public void notifyWin(CombOrientation orientation, int xCoordinate, int yCoordinate, Player player) {
         this.game.setGameState(GameState.OVER);
+    }
+
+    public void startGame() {
+        if (this.game.getGameState() == GameState.PAUSED)
+            this.game.setGameState(GameState.PLAYING);
     }
 }

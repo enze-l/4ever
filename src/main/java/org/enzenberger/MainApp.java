@@ -255,6 +255,6 @@ public class MainApp extends Application {
     public void startGame() {
         hideSelectionWindow();
         this.game.setCurrentPlayer(this.game.getPlayer1());
-        this.game.setGameState(GameState.PLAYING);
+        this.gameController.startGame();
     }
 }
