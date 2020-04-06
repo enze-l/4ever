@@ -3,6 +3,7 @@ package org.enzenberger.control;
 import org.enzenberger.exceptions.ColumnOverflowException;
 import org.enzenberger.model.CombOrientation;
 import org.enzenberger.model.Game;
+import org.enzenberger.model.GameState;
 import org.enzenberger.model.WinListener;
 import org.enzenberger.model.player.Player;
 
@@ -22,7 +23,7 @@ public class GameController implements BoardClickListener, WinListener {
 
     @Override
     public void onColumnClicked(int column) {
-        if (this.game.gameActive()) {
+        if (this.game.getGameState()== GameState.PLAYING) {
             try {
                 boardController.dropStone(this.game.getCurrentPlayer(), column);
                 changeActivePlayer();
@@ -37,6 +38,6 @@ public class GameController implements BoardClickListener, WinListener {
 
     @Override
     public void notifyWin(CombOrientation orientation, int xCoordinate, int yCoordinate, Player player) {
-        this.game.setGameActive(false);
+        this.game.setGameState(GameState.OVER);
     }
 }

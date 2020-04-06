@@ -13,6 +13,7 @@ import org.enzenberger.control.GameController;
 import org.enzenberger.control.selectionWindow.SelectionWindowController;
 import org.enzenberger.model.Board;
 import org.enzenberger.model.Game;
+import org.enzenberger.model.GameState;
 import org.enzenberger.view.BoardView;
 
 import java.io.IOException;
@@ -254,6 +255,6 @@ public class MainApp extends Application {
     public void startGame() {
         hideSelectionWindow();
         this.game.setCurrentPlayer(this.game.getPlayer1());
-        this.game.setGameActive(true);
+        this.game.setGameState(GameState.PLAYING);
     }
 }
