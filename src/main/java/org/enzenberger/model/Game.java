@@ -14,7 +14,7 @@ public class Game {
 
     public Game() {
         this.board = new Board();
-        this.gameState = new SimpleObjectProperty<>(GameState.PAUSED);
+        this.gameState = new SimpleObjectProperty<>(GameState.INITIALIZING);
     }
 
     public Player getCurrentPlayer() {

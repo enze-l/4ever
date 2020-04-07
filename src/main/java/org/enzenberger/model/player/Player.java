@@ -13,4 +13,8 @@ public abstract class Player {
     public Color getColor() {
         return color;
     }
+
+    public abstract boolean isLocalPlayer();
+
+    public abstract void notifyTurn();
 }

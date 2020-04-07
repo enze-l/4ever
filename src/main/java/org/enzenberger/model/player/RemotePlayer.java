@@ -6,4 +6,14 @@ public class RemotePlayer extends Player {
     public RemotePlayer(Color color) {
         super(color);
     }
+
+    @Override
+    public boolean isLocalPlayer() {
+        return false;
+    }
+
+    @Override
+    public void notifyTurn() {
+
+    }
 }

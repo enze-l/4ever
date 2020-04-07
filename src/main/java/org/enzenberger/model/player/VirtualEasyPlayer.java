@@ -6,4 +6,14 @@ public class VirtualEasyPlayer extends Player {
     public VirtualEasyPlayer(Color color) {
         super(color);
     }
+
+    @Override
+    public boolean isLocalPlayer() {
+        return false;
+    }
+
+    @Override
+    public void notifyTurn() {
+
+    }
 }

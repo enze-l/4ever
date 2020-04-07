@@ -6,4 +6,14 @@ public class VirtualMediumPlayer extends Player {
     public VirtualMediumPlayer(Color color) {
         super(color);
     }
+
+    @Override
+    public boolean isLocalPlayer() {
+        return false;
+    }
+
+    @Override
+    public void notifyTurn() {
+
+    }
 }

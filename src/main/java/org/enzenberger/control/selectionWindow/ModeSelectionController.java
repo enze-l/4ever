@@ -23,7 +23,7 @@ public class ModeSelectionController extends SelectionWindowController {
     }
 
     private void setGameMode(GameMode gameMode){
-        this.game.setGameMode(new ForeverGameMode());
+        this.game.setGameMode(gameMode);
         this.mainApp.startGame();
     }
 }
