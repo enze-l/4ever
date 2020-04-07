@@ -4,16 +4,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enzenberger.control.selectionWindow.VirtualPlayerSelectionController">
+<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enzenberger.control.selectionWindow.PauseOptionsController">
     <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: grey;" />
     <Pane maxHeight="Infinity" maxWidth="Infinity" prefHeight="200.0" prefWidth="200.0" />
     <VBox alignment="CENTER" maxHeight="200.0" maxWidth="300.0" prefHeight="200.0" prefWidth="300.0" spacing="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <padding>
             <Insets bottom="16.0" left="64.0" right="64.0" top="16.0" />
         </padding>
-        <Button maxWidth="Infinity" onAction="#setVirtualPlayerEasy" text="Easy" />
-        <Button maxWidth="Infinity" onAction="#setVirtualPlayerMedium" text="Medium" />
-        <Button maxWidth="Infinity" onAction="#setVirtualPlayerHard" text="Hard" />
-        <Button maxWidth="Infinity" onAction="#goBack" text="back" />
+        <Button maxWidth="Infinity" text="continue game" />
+        <Button maxWidth="Infinity" text="restart game" />
+        <Button maxWidth="Infinity" text="exit game" />
     </VBox>
 </StackPane>

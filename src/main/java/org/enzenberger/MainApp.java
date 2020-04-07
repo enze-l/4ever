@@ -152,28 +152,28 @@ public class MainApp extends Application {
      * showing a menu to select the player configuration
      */
     public void showPlayerSelection() {
-        showWindowMenu("PlayerSelection.fxml");
+        showSelectionWindow("PlayerSelection.fxml");
     }
 
     /**
      * showing a menu to select the gaming mode
      */
     public void showModeSelection() {
-        showWindowMenu("ModeSelection.fxml");
+        showSelectionWindow("ModeSelection.fxml");
     }
 
     /**
      * showing a panel to manage online-connections
      */
     public void showConnectionPanel() {
-        showWindowMenu("ConnectionPanel.fxml");
+        showSelectionWindow("ConnectionPanel.fxml");
     }
 
     /**
      * showing a panel to chose the difficulty of the virtual opponent
      */
     public void showVirtualPlayerSelection() {
-        showWindowMenu("VirtualPlayerSelection.fxml");
+        showSelectionWindow("VirtualPlayerSelection.fxml");
     }
 
     /**
@@ -183,14 +183,19 @@ public class MainApp extends Application {
      */
     public void handleGoBackAction() {
         if (this.selectionWindow.isVisible()) {
-            this.selectionWindowOrder.pop();
-            if (this.selectionWindowOrder.empty()) {
-                this.exit();
-            } else {
-                showWindowMenu(this.selectionWindowOrder.pop());
+            if (this.game.getGameState()== GameState.INITIALIZING) {
+                this.selectionWindowOrder.pop();
+                if (this.selectionWindowOrder.empty()) {
+                    this.exit();
+                } else {
+                    showSelectionWindow(this.selectionWindowOrder.pop());
+                }
+            }else {
+                this.selectionWindow.setVisible(false);
             }
         } else {
             this.selectionWindow.setVisible(true);
+            showSelectionWindow("PauseOptions.fxml");
         }
     }
 
@@ -199,7 +204,7 @@ public class MainApp extends Application {
      *
      * @param resourceName the name of the fxml resource file
      */
-    private void showWindowMenu(String resourceName) {
+    private void showSelectionWindow(String resourceName) {
         if (this.selectionWindow == null) {
             loadWindowResource(resourceName);
             this.rootLayout.getChildren().add(selectionWindow);
@@ -247,6 +252,7 @@ public class MainApp extends Application {
      */
     public void hideSelectionWindow() {
         selectionWindow.visibleProperty().set(false);
+        this.selectionWindowOrder.clear();
     }
 
     /**
