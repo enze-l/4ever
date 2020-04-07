@@ -41,6 +41,12 @@ public class GameController implements BoardClickListener, WinListener {
         }
     }
 
+    public void continueGame(){
+        if (this.game.getGameState()== GameState.PAUSED){
+            this.game.setGameState(GameState.PLAYING);
+        }
+    }
+
     public void restartGame() {
         this.game.resetBoard();
         this.game.setGameState(GameState.PLAYING);

@@ -192,9 +192,11 @@ public class MainApp extends Application {
                 }
             }else {
                 this.selectionWindow.setVisible(false);
+                this.game.setGameState(GameState.PLAYING);
             }
         } else {
             this.selectionWindow.setVisible(true);
+            this.game.setGameState(GameState.PAUSED);
             showSelectionWindow("PauseOptions.fxml");
         }
     }
@@ -229,6 +231,7 @@ public class MainApp extends Application {
             SelectionWindowController selectionWindowController = loader.getController();
             selectionWindowController.setGame(this.game);
             selectionWindowController.setMainApp(this);
+            selectionWindowController.setGameController(this.gameController);
 
             selectionWindow.setAlignment(Pos.CENTER);
             selectionWindow.setPrefHeight(rootLayout.getHeight());

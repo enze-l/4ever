@@ -11,8 +11,8 @@
         <padding>
             <Insets bottom="16.0" left="64.0" right="64.0" top="16.0" />
         </padding>
-        <Button maxWidth="Infinity" text="continue game" />
-        <Button maxWidth="Infinity" text="restart game" />
-        <Button maxWidth="Infinity" text="exit game" />
+        <Button maxWidth="Infinity" onAction="#onContinueGameClicked" text="continue game" />
+        <Button maxWidth="Infinity" onAction="#onRestartGameClicked" text="restart game" />
+        <Button maxWidth="Infinity" onAction="#onExitGameClicked" text="exit game" />
     </VBox>
 </StackPane>

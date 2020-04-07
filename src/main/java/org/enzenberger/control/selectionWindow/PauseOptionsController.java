@@ -1,4 +1,20 @@
 package org.enzenberger.control.selectionWindow;
 
-public class PauseOptionsController extends SelectionWindowController{
+import javafx.fxml.FXML;
+
+public class PauseOptionsController extends SelectionWindowController {
+    @FXML
+    private void onRestartGameClicked() {
+        //todo
+    }
+
+    @FXML
+    private void onContinueGameClicked() {
+//todo
+    }
+
+    @FXML
+    private void onExitGameClicked() {
+//todo
+    }
 }
