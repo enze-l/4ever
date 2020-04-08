@@ -24,6 +24,6 @@ public abstract class SelectionWindowController {
 
     @FXML
     public void goBack(){
-        this.mainApp.handleGoBackAction();
+        this.mainApp.handleEscapeAction();
     }
 }

@@ -19,6 +19,5 @@ public class ClassicGameMode extends GameMode {
     @Override
     public void startPlayerMove() {
         this.game.getCurrentPlayer().notifyTurn();
-
     }
 }

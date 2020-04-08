@@ -13,7 +13,6 @@ import org.enzenberger.control.GameController;
 import org.enzenberger.control.selectionWindow.SelectionWindowController;
 import org.enzenberger.model.Board;
 import org.enzenberger.model.Game;
-import org.enzenberger.model.GameState;
 import org.enzenberger.view.BoardView;
 
 import java.io.IOException;
@@ -34,6 +33,8 @@ public class MainApp extends Application {
     private final Game game;
     private final GameController gameController;
 
+    private boolean gameActive;
+
     /**
      * Starting the app is done trough this method
      *
@@ -51,6 +52,7 @@ public class MainApp extends Application {
         this.gameController = new GameController();
         this.gameController.setGame(this.game);
         this.selectionWindowOrder = new Stack<>();
+        this.gameActive = false;
     }
 
     /**
@@ -85,7 +87,7 @@ public class MainApp extends Application {
     private void handleKeyEvent(KeyCode code) {
         switch (code) {
             case ESCAPE:
-                handleGoBackAction();
+                handleEscapeAction();
                 break;
             case DIGIT1:
                 this.gameController.onColumnClicked(0);
@@ -152,6 +154,7 @@ public class MainApp extends Application {
      * showing a menu to select the player configuration
      */
     public void showPlayerSelection() {
+        this.selectionWindowOrder.clear();
         showSelectionWindow("PlayerSelection.fxml");
     }
 
@@ -181,23 +184,23 @@ public class MainApp extends Application {
      * Inside a menu it shows the hierarchical previous menu.
      * If the last menu is displayed, it closes the App
      */
-    public void handleGoBackAction() {
-        if (this.selectionWindow.isVisible()) {
-            if (this.game.getGameState()== GameState.INITIALIZING) {
+    public void handleEscapeAction() {
+        if (!this.gameActive) {
                 this.selectionWindowOrder.pop();
                 if (this.selectionWindowOrder.empty()) {
                     this.exit();
                 } else {
                     showSelectionWindow(this.selectionWindowOrder.pop());
                 }
-            }else {
-                this.selectionWindow.setVisible(false);
-                this.game.setGameState(GameState.PLAYING);
-            }
         } else {
-            this.selectionWindow.setVisible(true);
-            this.game.setGameState(GameState.PAUSED);
-            showSelectionWindow("PauseOptions.fxml");
+            if (this.selectionWindow.isVisible()){
+                this.selectionWindow.setVisible(false);
+                this.gameController.resumeGame();
+            } else {
+                this.selectionWindow.setVisible(true);
+                this.gameController.pauseGame();
+                showSelectionWindow("PauseOptions.fxml");
+            }
         }
     }
 
@@ -265,5 +268,10 @@ public class MainApp extends Application {
         hideSelectionWindow();
         this.game.setCurrentPlayer(this.game.getPlayer1());
         this.gameController.startGame();
+        this.gameActive = true;
+    }
+
+    public void setGameActive(boolean active) {
+        this.gameActive = active;
     }
 }

@@ -65,8 +65,13 @@ public class BoardView {
             for (int height = 0; height < Board.rowCount; height++) {
                 int xPosition = width;
                 int yPosition = height;
-                this.game.getBoard().getFieldProperty(width, height).addListener(
-                        move -> animateStoneDrop(game.getBoard().getField(xPosition, yPosition), xPosition, yPosition)
+                this.game.getBoard().getFieldProperty(width, height).addListener((observableValue, player, t1) -> {
+                    //I have no clue why this is working. I thought the condition should be the other way around...
+                            if (player == null) {
+                                animateStoneDrop(game.getBoard().getField(xPosition, yPosition), xPosition, yPosition);
+                            }
+                            else displayCurrentBoard();
+                        }
                 );
             }
         }

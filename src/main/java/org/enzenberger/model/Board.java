@@ -32,6 +32,15 @@ public class Board {
         }
     }
 
+    public void resetBoard(){
+        for (int row = 0; row < rowCount; row++) {
+            for (int column = 0; column < columnCount; column++) {
+                fields.get(row).get(column).setValue(null);
+                groundTruth.get(row).set(column, null);
+            }
+        }
+    }
+
     private void initFields() {
         for (int row = 0; row < rowCount; row++) {
             fields.add(new ArrayList<>());

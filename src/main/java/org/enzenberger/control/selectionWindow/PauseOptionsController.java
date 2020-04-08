@@ -5,16 +5,20 @@ import javafx.fxml.FXML;
 public class PauseOptionsController extends SelectionWindowController {
     @FXML
     private void onRestartGameClicked() {
-        //todo
+        this.gameController.restartGame();
+        this.mainApp.handleEscapeAction();
     }
 
     @FXML
     private void onContinueGameClicked() {
-//todo
+        this.gameController.resumeGame();
+        this.mainApp.handleEscapeAction();
     }
 
     @FXML
     private void onExitGameClicked() {
-//todo
+        this.gameController.stopGame();
+        this.mainApp.setGameActive(false);
+        this.mainApp.showPlayerSelection();
     }
 }
