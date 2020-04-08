@@ -33,7 +33,7 @@ public class Game {
     }
 
     public void resetBoard() {
-        this.board.resetBoard();
+        this.board.clearBoard();
     }
 
     public void setPlayer1(Player player1) {

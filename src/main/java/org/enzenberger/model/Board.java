@@ -32,7 +32,7 @@ public class Board {
         }
     }
 
-    public void resetBoard(){
+    public void clearBoard(){
         for (int row = 0; row < rowCount; row++) {
             for (int column = 0; column < columnCount; column++) {
                 fields.get(row).get(column).setValue(null);
