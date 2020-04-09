@@ -5,13 +5,12 @@ import org.enzenberger.exceptions.ColumnOverflowException;
 public class TimeGameMode extends GameMode implements TimeListener {
     private StopWatch stopWatch;
 
-    public TimeGameMode() {
+    public void setTimeLimit(int time) {
         this.stopWatch = new StopWatch();
         this.stopWatch.setTimeListener(this);
-    }
-
-    public void setTimeLimit(int time) {
-        this.stopWatch.setTime(time);
+        this.stopWatch.setTime(5);
+        Thread thread = new Thread(stopWatch);
+        thread.start();
     }
 
     @Override

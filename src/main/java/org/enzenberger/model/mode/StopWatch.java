@@ -9,16 +9,19 @@ public class StopWatch implements Runnable {
     @SuppressWarnings("InfiniteLoopStatement")
     @Override
     public void run() {
-        this.timeRunning = true;
+        this.timeRunning = false;
         try {
-            while (true) {
-                    while(currentTime>=0&&timeRunning) {
+            synchronized (this) {
+                while (true) {
+                    while (currentTime >= 0 && timeRunning) {
                         this.wait(100);
                         this.currentTime = this.currentTime - 0.1;
                         this.timeListener.notifyTime(currentTime);
                         System.out.println(currentTime);
                     }
-                this.wait();
+                    this.timeListener.notifyTimeOver();
+                    this.wait();
+                }
             }
         } catch (InterruptedException e) {
             System.out.println("fatal StopWatch error");
@@ -35,12 +38,16 @@ public class StopWatch implements Runnable {
 
     public void resumeTimer() {
         this.timeRunning = true;
-        this.notify();
+        synchronized (this) {
+            this.notify();
+        }
     }
 
     public void resetTimer() {
         this.currentTime = timeLimit;
-        this.notify();
+        synchronized (this) {
+            this.notify();
+        }
     }
 
     public void setTimeListener(TimeListener timeOverListener) {

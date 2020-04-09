@@ -41,7 +41,6 @@ public class FourStonesCombination {
         this.winListener.notifyWin(combOrientation, xCoordinate, yCoordinate, player);
     }
 
-
     public void setWinListener(WinListener winListener) {
         this.winListener = winListener;
     }
