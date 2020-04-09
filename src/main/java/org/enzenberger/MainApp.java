@@ -268,7 +268,7 @@ public class MainApp extends Application {
         hideSelectionWindow();
         this.game.setCurrentPlayer(this.game.getPlayer1());
         this.gameController.startGame();
-        this.gameActive = true;
+        setGameActive(true);
     }
 
     public void setGameActive(boolean active) {

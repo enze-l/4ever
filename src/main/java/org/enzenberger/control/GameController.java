@@ -25,6 +25,7 @@ public class GameController implements BoardClickListener, WinListener {
     public void startGame() {
         if (this.game.getGameState() == GameState.INITIALIZING) {
             this.game.getGameMode().setGame(this.game);
+            this.game.resetBoard();
             this.game.setGameState(GameState.PLAYING);
         }
     }
