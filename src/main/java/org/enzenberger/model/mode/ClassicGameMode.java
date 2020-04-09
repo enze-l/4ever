@@ -1,23 +1,24 @@
 package org.enzenberger.model.mode;
 
-import org.enzenberger.exceptions.ColumnOverflowException;
-import org.enzenberger.model.GameState;
-
 public class ClassicGameMode extends GameMode {
+
     @Override
-    public void requestPlayerMove(int column) {
-        if (this.game.getGameState() == GameState.PLAYING && this.game.getCurrentPlayer().isLocalPlayer()) {
-            try {
-                this.boardController.dropStone(this.game.getCurrentPlayer(), column);
-                changeActivePlayer();
-            } catch (ColumnOverflowException e) {
-                e.printStackTrace();
-            }
-        }
+    protected void onPlayerChangeHook() {
+
     }
 
     @Override
-    public void startPlayerMove() {
+    protected void resetPlayerMove() {
+
+    }
+
+    @Override
+    protected void pausePlayerMove() {
+
+    }
+
+    @Override
+    public void schedulePlayerMove() {
         this.game.getCurrentPlayer().notifyTurn();
     }
 }

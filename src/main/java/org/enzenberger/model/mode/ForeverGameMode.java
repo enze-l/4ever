@@ -1,13 +1,24 @@
 package org.enzenberger.model.mode;
 
 public class ForeverGameMode extends GameMode {
+
     @Override
-    public void requestPlayerMove(int column) {
+    protected void onPlayerChangeHook() {
 
     }
 
     @Override
-    public void startPlayerMove() {
+    protected void resetPlayerMove() {
+
+    }
+
+    @Override
+    protected void pausePlayerMove() {
+
+    }
+
+    @Override
+    public void schedulePlayerMove() {
 
     }
 }

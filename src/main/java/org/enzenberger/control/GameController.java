@@ -55,6 +55,6 @@ public class GameController implements BoardClickListener, WinListener {
 
     @Override
     public void onColumnClicked(int column) {
-        this.game.getGameMode().requestPlayerMove(column);
+        this.game.getGameMode().reactToUserInput(column);
     }
 }
