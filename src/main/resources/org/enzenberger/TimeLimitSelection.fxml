@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enzenberger.control.selectionWindow.TimeSelectionController">
+    <Pane maxHeight="Infinity" maxWidth="Infinity" prefHeight="200.0" prefWidth="200.0" />
+    <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="300.0"
+          style="-fx-background-color: grey;">
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Label">
+                <VBox.margin>
+                    <Insets/>
+                </VBox.margin>
+            </Label>
+            <Slider blockIncrement="1.0" majorTickUnit="30.0" max="120.0" min="3.0" minorTickCount="10" value="30.0">
+                <padding>
+                    <Insets bottom="10.0" left="60.0" right="60.0" top="10.0"/>
+                </padding>
+            </Slider>
+            <HBox alignment="CENTER" spacing="8.0">
+                <Button maxWidth="Infinity" onAction="#goBack" text="back"/>
+                <Button maxWidth="Infinity" onAction="#startGame" text="start"/>
+            </HBox>
+        </VBox>
+    </Pane>
+</StackPane>

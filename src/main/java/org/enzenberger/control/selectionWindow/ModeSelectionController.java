@@ -14,7 +14,8 @@ public class ModeSelectionController extends SelectionWindowController {
 
     @FXML
     private void setGameModeTime(){
-        setGameMode(new TimeGameMode());
+        this.game.setGameMode(new TimeGameMode());
+        this.mainApp.showTimeSelection();
     }
 
     @FXML

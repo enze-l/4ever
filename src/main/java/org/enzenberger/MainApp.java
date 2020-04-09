@@ -179,6 +179,10 @@ public class MainApp extends Application {
         showSelectionWindow("VirtualPlayerSelection.fxml");
     }
 
+    public void showTimeSelection() {
+        showSelectionWindow("TimeLimitSelection.fxml");
+    }
+
     /**
      * Handling a goBack action is done here. If the board is in focus it shows the menu.
      * Inside a menu it shows the hierarchical previous menu.
@@ -274,4 +278,6 @@ public class MainApp extends Application {
     public void setGameActive(boolean active) {
         this.gameActive = active;
     }
+
+
 }
