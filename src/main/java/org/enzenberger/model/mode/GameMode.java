@@ -28,11 +28,10 @@ public abstract class GameMode implements GameStateListener {
         }
     }
 
-
-
     protected void changeActivePlayer(){
         onPlayerChangeHook();
         this.game.setCurrentPlayer(this.game.getOpponent(this.game.getCurrentPlayer()));
+        this.game.getCurrentPlayer().notifyTurn();
     }
 
     protected abstract void onPlayerChangeHook();
