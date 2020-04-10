@@ -9,13 +9,11 @@ public class TimeGameMode extends GameMode implements TimeListener {
         this.stopWatch = new StopWatch();
         this.stopWatch.setTimeListener(this);
         this.stopWatch.setTime(5);
-        Thread thread = new Thread(stopWatch);
-        thread.start();
     }
 
     @Override
     protected void onPlayerChangeHook() {
-        this.stopWatch.resetTimer();
+        this.stopWatch.start();
     }
 
     @Override
@@ -41,6 +39,7 @@ public class TimeGameMode extends GameMode implements TimeListener {
             try {
                 this.boardController.dropStone(this.game.getCurrentPlayer(), (int) (Math.random() * 7));
                 turnDone = true;
+                changeActivePlayer();
             } catch (ColumnOverflowException e) {
                 e.printStackTrace();
             }

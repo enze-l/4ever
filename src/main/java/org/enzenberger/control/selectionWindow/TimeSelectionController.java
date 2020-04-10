@@ -8,6 +8,6 @@ public class TimeSelectionController extends SelectionWindowController {
     private void startGame() {
         this.mainApp.startGame();
         TimeGameMode timeGameMode = (TimeGameMode) this.game.getGameMode();
-        timeGameMode.setTimeLimit(10);
+        timeGameMode.setTimeLimit(3);
     }
 }

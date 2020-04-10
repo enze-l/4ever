@@ -1,12 +1,40 @@
 package org.enzenberger.model.mode;
 
-public class StopWatch implements Runnable {
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+
+public class StopWatch {
     double timeLimit;
     double currentTime;
     private TimeListener timeListener;
     private boolean timeRunning;
+    private Service<Void> backGroundThread;
 
-    @SuppressWarnings("InfiniteLoopStatement")
+    public void start() {
+        this.backGroundThread = new Service<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        currentTime = timeLimit;
+                        while (currentTime >= 0) {
+                            Thread.sleep(100);
+                            currentTime = currentTime - 0.1;
+                            timeListener.notifyTime(currentTime);
+                        }
+                        return null;
+                    }
+                };
+            }
+        };
+
+        this.backGroundThread.setOnSucceeded(event -> timeListener.notifyTimeOver());
+
+        backGroundThread.restart();
+    }
+
+    /*@SuppressWarnings("InfiniteLoopStatement")
     @Override
     public void run() {
         this.timeRunning = false;
@@ -27,7 +55,7 @@ public class StopWatch implements Runnable {
             System.out.println("fatal StopWatch error");
         }
     }
-
+*/
     public void setTime(int time) {
         this.timeLimit = time;
     }
