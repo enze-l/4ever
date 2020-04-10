@@ -1,6 +1,7 @@
 package org.enzenberger.model.mode;
 
 import org.enzenberger.exceptions.ColumnOverflowException;
+import org.enzenberger.model.GameState;
 
 public class TimeGameMode extends GameMode implements TimeListener {
     private StopWatch stopWatch;
@@ -8,7 +9,8 @@ public class TimeGameMode extends GameMode implements TimeListener {
     public void setTimeLimit(int time) {
         this.stopWatch = new StopWatch();
         this.stopWatch.setTimeListener(this);
-        this.stopWatch.setTime(5);
+        this.stopWatch.setTime(time);
+        this.stopWatch.start();
     }
 
     @Override
@@ -34,14 +36,13 @@ public class TimeGameMode extends GameMode implements TimeListener {
 
     @Override
     public void notifyTimeOver() {
-        boolean turnDone= false;
-        while (!turnDone) {
+        boolean turnDone = false;
+        while (!turnDone && this.game.getGameState() == GameState.PLAYING) {
             try {
                 this.boardController.dropStone(this.game.getCurrentPlayer(), (int) (Math.random() * 7));
                 turnDone = true;
                 changeActivePlayer();
-            } catch (ColumnOverflowException e) {
-                e.printStackTrace();
+            } catch (ColumnOverflowException ignored) {
             }
         }
     }

@@ -7,10 +7,6 @@ import org.enzenberger.model.player.Player;
 public class BoardController {
     Board board;
 
-    public BoardController() {
-
-    }
-
     public void setBoard(Board board) {
         this.board = board;
     }
