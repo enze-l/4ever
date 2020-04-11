@@ -137,6 +137,11 @@ public class Board {
     private void mirrorTruth() {
         for (int row = 0; row < rowCount; row++) {
             for (int column = 0; column < columnCount; column++) {
+                this.fields.get(row).get(column).setValue(null);
+            }
+        }
+        for (int row = 0; row < rowCount; row++) {
+            for (int column = 0; column < columnCount; column++) {
                 this.fields.get(row).get(column).setValue(this.groundTruth.get(row).get(column));
             }
         }

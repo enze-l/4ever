@@ -166,6 +166,5 @@ public class BoardView {
                         new KeyValue(stone.translateYProperty(), yPosition * gridDistance + gridDistance / 2))
         );
         timeline.play();
-        timeline.onFinishedProperty().addListener(event -> displayCurrentBoard());
     }
 }
