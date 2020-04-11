@@ -26,13 +26,13 @@ public class Board {
         initFourInARowDetectors();
     }
 
-    public void setWinListener(WinListener winListener){
-        for (FourStonesCombination combination:rows){
+    public void setWinListener(WinListener winListener) {
+        for (FourStonesCombination combination : rows) {
             combination.setWinListener(winListener);
         }
     }
 
-    public void clearBoard(){
+    public void clearBoard() {
         for (int row = 0; row < rowCount; row++) {
             for (int column = 0; column < columnCount; column++) {
                 fields.get(row).get(column).setValue(null);
@@ -118,5 +118,27 @@ public class Board {
 
     public Property<Player> getFieldProperty(int width, int height) {
         return fields.get(height).get(width);
+    }
+
+    public List<Player> getRow(int rowNumber) {
+        return groundTruth.get(rowNumber);
+    }
+
+    public void removeLastRow() {
+        this.groundTruth.remove(groundTruth.size() - 1);
+        LinkedList<Player> newRow = new LinkedList<>();
+        for (int column = 0; column < 7; column++) {
+            newRow.add(null);
+        }
+        this.groundTruth.add(0, newRow);
+        mirrorTruth();
+    }
+
+    private void mirrorTruth() {
+        for (int row = 0; row < rowCount; row++) {
+            for (int column = 0; column < columnCount; column++) {
+                this.fields.get(row).get(column).setValue(this.groundTruth.get(row).get(column));
+            }
+        }
     }
 }
