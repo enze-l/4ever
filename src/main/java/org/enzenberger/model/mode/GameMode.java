@@ -15,7 +15,7 @@ public abstract class GameMode implements GameStateListener {
         this.game = game;
         this.boardController = new BoardController();
         this.boardController.setBoard(this.game.getBoard());
-        this.game.getGameStateProperty().addListener(observable -> notifyGameStateChange(this.game.getGameState()));
+        this.game.setGameStateListener(this);
     }
 
     public void reactToUserInput(int column){

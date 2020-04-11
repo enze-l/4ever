@@ -11,6 +11,7 @@ public class Game {
     private Player currentPlayer;
     private GameMode gameMode;
     private SimpleObjectProperty<GameState> gameState;
+    private GameStateListener gameStatListener;
 
     public Game() {
         this.board = new Board();
@@ -72,7 +73,17 @@ public class Game {
         return gameState.get();
     }
 
-    public SimpleObjectProperty<GameState> getGameStateProperty() {
-        return gameState;
+    public void setGameStateListener(GameStateListener gameStateListener) {
+        if(this.gameStatListener==null) {
+            this.gameStatListener = gameStateListener;
+            this.gameState.addListener((listener -> notifyListener()));
+        }
+        else{
+            this.gameStatListener = gameStateListener;
+        }
+    }
+
+    private void notifyListener() {
+        this.gameStatListener.notifyGameStateChange(this.gameState.getValue());
     }
 }
