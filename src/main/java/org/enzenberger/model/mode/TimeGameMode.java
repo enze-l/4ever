@@ -6,7 +6,7 @@ import org.enzenberger.model.GameState;
 public class TimeGameMode extends GameMode implements TimeListener {
     private StopWatch stopWatch;
 
-    public void setTimeLimit(int time) {
+    public void setTimeLimit(double time) {
         this.stopWatch = new StopWatch();
         this.stopWatch.setTimeListener(this);
         this.stopWatch.setTime(time);

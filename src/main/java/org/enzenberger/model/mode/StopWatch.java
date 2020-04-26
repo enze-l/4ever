@@ -36,7 +36,7 @@ public class StopWatch {
         backGroundThread.restart();
     }
 
-    public void setTime(int time) {
+    public void setTime(double time) {
         this.timeLimit = time;
     }
 
