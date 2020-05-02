@@ -9,11 +9,11 @@ public class FourStonesCombination {
     CombOrientation combOrientation;
     int xCoordinate;
     int yCoordinate;
-    private List<Property<Player>> fields;
+    private List<Property<Stone>> fields;
     private WinListener winListener;
 
     public FourStonesCombination(CombOrientation combOrientation, int xCoordinate,
-                                 int yCoordinate, List<Property<Player>> fields) {
+                                 int yCoordinate, List<Property<Stone>> fields) {
         this.combOrientation = combOrientation;
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
@@ -22,19 +22,21 @@ public class FourStonesCombination {
     }
 
     private void setChangeListener() {
-        for (Property<Player> player : fields) {
+        for (Property<Stone> player : fields) {
             player.addListener(event -> checkForWin());
         }
     }
 
     private void checkForWin() {
-        Player player = fields.get(0).getValue();
-        if (player != null
-                && player == fields.get(1).getValue()
-                && player == fields.get(2).getValue()
-                && player == fields.get(3).getValue()) {
-            notifyWinListener(player);
-        }
+        try {
+            Player player = fields.get(0).getValue().getPlayer();
+            if (player != null
+                    && player == fields.get(1).getValue().getPlayer()
+                    && player == fields.get(2).getValue().getPlayer()
+                    && player == fields.get(3).getValue().getPlayer()) {
+                notifyWinListener(player);
+            }
+        } catch (NullPointerException ignored){}
     }
 
     private void notifyWinListener(Player player) {

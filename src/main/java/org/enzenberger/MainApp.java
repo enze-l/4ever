@@ -28,7 +28,7 @@ public class MainApp extends Application {
     private AnchorPane rootLayout;
 
     private StackPane selectionWindow;
-    private Stack<String> selectionWindowOrder;
+    private final Stack<String> selectionWindowOrder;
 
     private final Game game;
     private final GameController gameController;
@@ -117,8 +117,7 @@ public class MainApp extends Application {
     }
 
     private void toggleFullscreen(){
-        if (this.primaryStage.isFullScreen())this.primaryStage.setFullScreen(false);
-        else this.primaryStage.setFullScreen(true);
+        this.primaryStage.setFullScreen(!this.primaryStage.isFullScreen());
     }
 
     /**

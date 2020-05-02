@@ -13,8 +13,8 @@ public class Board {
     public static final int rowCount = 6;
     public static final double boarderDistance = 0.125;
 
-    List<List<Property<Player>>> fields;
-    List<List<Player>> groundTruth;
+    List<List<Property<Stone>>> fields;
+    List<List<Stone>> groundTruth;
 
     List<FourStonesCombination> rows;
 
@@ -69,7 +69,7 @@ public class Board {
 
     private void addFourVertical(int column, int row) {
         if (row < rowCount - 3) {
-            List<Property<Player>> fourRowFields = new LinkedList<>();
+            List<Property<Stone>> fourRowFields = new LinkedList<>();
             for (int field = 0; field < 4; field++) {
                 fourRowFields.add(this.fields.get(row + field).get(column));
             }
@@ -79,7 +79,7 @@ public class Board {
 
     private void addFourHorizontal(int column, int row) {
         if (column < columnCount - 3) {
-            List<Property<Player>> fourRowFields = new LinkedList<>();
+            List<Property<Stone>> fourRowFields = new LinkedList<>();
             for (int field = 0; field < 4; field++) {
                 fourRowFields.add(this.fields.get(row).get(column + field));
             }
@@ -89,7 +89,7 @@ public class Board {
 
     private void addFourDown(int column, int row) {
         if (column < columnCount - 3 && row < rowCount - 3) {
-            List<Property<Player>> fourRowFields = new LinkedList<>();
+            List<Property<Stone>> fourRowFields = new LinkedList<>();
             for (int field = 0; field < 4; field++) {
                 fourRowFields.add(this.fields.get(row + field).get(column + field));
             }
@@ -99,7 +99,7 @@ public class Board {
 
     private void addFourUp(int column, int row) {
         if (column < columnCount - 3 && row > 3) {
-            List<Property<Player>> fourRowFields = new LinkedList<>();
+            List<Property<Stone>> fourRowFields = new LinkedList<>();
             for (int field = 0; field < 4; field++) {
                 fourRowFields.add(this.fields.get(row - field).get(column + field));
             }
@@ -108,25 +108,28 @@ public class Board {
     }
 
     public Player getField(int width, int height) {
-        return fields.get(height).get(width).getValue();
+        Stone stone = fields.get(height).get(width).getValue();
+        if ( stone != null) return fields.get(height).get(width).getValue().getPlayer();
+        else return null;
     }
 
     public void setField(Player player, int width, int height) {
-        fields.get(height).get(width).setValue(player);
-        groundTruth.get(height).set(width, player);
+        Stone stone = new Stone(player, width, 0);
+        fields.get(height).get(width).setValue(stone);
+        groundTruth.get(height).set(width, stone);
     }
 
-    public Property<Player> getFieldProperty(int width, int height) {
+    public Property<Stone> getFieldProperty(int width, int height) {
         return fields.get(height).get(width);
     }
 
-    public List<Player> getRow(int rowNumber) {
+    public List<Stone> getRow(int rowNumber) {
         return groundTruth.get(rowNumber);
     }
 
     public void removeLastRow() {
         this.groundTruth.remove(groundTruth.size() - 1);
-        LinkedList<Player> newRow = new LinkedList<>();
+        LinkedList<Stone> newRow = new LinkedList<>();
         for (int column = 0; column < 7; column++) {
             newRow.add(null);
         }

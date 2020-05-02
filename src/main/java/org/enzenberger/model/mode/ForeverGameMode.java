@@ -1,7 +1,7 @@
 package org.enzenberger.model.mode;
 
 import org.enzenberger.model.GameState;
-import org.enzenberger.model.player.Player;
+import org.enzenberger.model.Stone;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ public class ForeverGameMode extends GameMode {
     @Override
     protected void onPlayerChangeHook() {
         if(this.game.getGameState()== GameState.PLAYING) {
-            List<Player> upperBound = this.game.getBoard().getRow(2);
+            List<Stone> upperBound = this.game.getBoard().getRow(2);
             boolean allFieldsOccupied = true;
-            for (Player field : upperBound) {
+            for (Stone field : upperBound) {
                 if (field == null) {
                     allFieldsOccupied = false;
                     break;
